@@ -153,7 +153,7 @@ export function ContactForm({
           onChange={(e) => setValues({ ...values, message: e.target.value })}
         />
       </Field>
-      <p className="hidden" aria-hidden="true">
+      <p className="sr-only" aria-hidden="true">
         <label htmlFor="contact-website">Website</label>
         <input
           id="contact-website"
@@ -204,7 +204,7 @@ function Field({
         </div>
       )}
       {error ? (
-        <p className="text-sm text-red-700" role="alert">
+        <p id={`${id}-error`} className="text-sm text-red-700" role="alert">
           {error}
         </p>
       ) : null}

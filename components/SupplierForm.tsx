@@ -97,7 +97,7 @@ export function SupplierForm() {
             value={values.companyName}
             onChange={(e) => setValues({ ...values, companyName: e.target.value })}
           />
-          {errors.companyName ? <p className="text-sm text-red-700">{errors.companyName}</p> : null}
+          {errors.companyName ? <p className="text-sm text-red-700" role="alert">{errors.companyName}</p> : null}
         </div>
         <div className="grid gap-2">
           <label htmlFor="supplier-contact" className="text-sm font-medium text-navy">
@@ -110,7 +110,7 @@ export function SupplierForm() {
             value={values.contactName}
             onChange={(e) => setValues({ ...values, contactName: e.target.value })}
           />
-          {errors.contactName ? <p className="text-sm text-red-700">{errors.contactName}</p> : null}
+          {errors.contactName ? <p className="text-sm text-red-700" role="alert">{errors.contactName}</p> : null}
         </div>
       </div>
       <div className="grid gap-5 md:grid-cols-2">
@@ -126,7 +126,7 @@ export function SupplierForm() {
             value={values.email}
             onChange={(e) => setValues({ ...values, email: e.target.value })}
           />
-          {errors.email ? <p className="text-sm text-red-700">{errors.email}</p> : null}
+          {errors.email ? <p className="text-sm text-red-700" role="alert">{errors.email}</p> : null}
         </div>
         <div className="grid gap-2">
           <label htmlFor="supplier-phone" className="text-sm font-medium text-navy">
@@ -140,7 +140,7 @@ export function SupplierForm() {
             value={values.phone}
             onChange={(e) => setValues({ ...values, phone: e.target.value })}
           />
-          {errors.phone ? <p className="text-sm text-red-700">{errors.phone}</p> : null}
+          {errors.phone ? <p className="text-sm text-red-700" role="alert">{errors.phone}</p> : null}
         </div>
       </div>
       <div className="grid gap-5 md:grid-cols-2">
@@ -156,7 +156,7 @@ export function SupplierForm() {
             value={values.websiteUrl}
             onChange={(e) => setValues({ ...values, websiteUrl: e.target.value })}
           />
-          {errors.websiteUrl ? <p className="text-sm text-red-700">{errors.websiteUrl}</p> : null}
+          {errors.websiteUrl ? <p className="text-sm text-red-700" role="alert">{errors.websiteUrl}</p> : null}
         </div>
         <div className="grid gap-2">
           <label htmlFor="supplier-type" className="text-sm font-medium text-navy">
@@ -175,7 +175,7 @@ export function SupplierForm() {
               </option>
             ))}
           </select>
-          {errors.companyType ? <p className="text-sm text-red-700">{errors.companyType}</p> : null}
+          {errors.companyType ? <p className="text-sm text-red-700" role="alert">{errors.companyType}</p> : null}
         </div>
       </div>
       <div className="grid gap-2">
@@ -232,7 +232,7 @@ export function SupplierForm() {
           value={values.message}
           onChange={(e) => setValues({ ...values, message: e.target.value })}
         />
-        {errors.message ? <p className="text-sm text-red-700">{errors.message}</p> : null}
+        {errors.message ? <p className="text-sm text-red-700" role="alert">{errors.message}</p> : null}
       </div>
       <div className="flex items-start gap-3">
         <input
@@ -246,7 +246,7 @@ export function SupplierForm() {
           I confirm that I am authorized to discuss the products or brands referenced in this inquiry.
         </label>
       </div>
-      <p className="hidden" aria-hidden="true">
+      <p className="sr-only" aria-hidden="true">
         <label htmlFor="supplier-fax">Fax</label>
         <input
           id="supplier-fax"

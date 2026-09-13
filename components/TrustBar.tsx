@@ -12,7 +12,7 @@ const items = [
     copy: "Purchasing across household, personal care, and general merchandise.",
   },
   {
-    title: "Commercial & Government Opportunities",
+    title: "Commercial & Government",
     copy: "Prepared to evaluate eligible commercial and public-sector purchasing needs.",
   },
 ];

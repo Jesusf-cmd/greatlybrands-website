@@ -139,10 +139,30 @@ export default function SuppliersPage() {
           <div className="md:col-span-4">
             <h2 className="text-3xl font-semibold text-navy">Supplier inquiry</h2>
             <p className="mt-4 text-muted">
-              Share company, category, and product details. Receipt of this form
+              Share company, category, and product details. Submitting this form
               confirms that the inquiry was received for review. It does not
-              constitute acceptance as a supplier.
+              constitute acceptance as a supplier or a purchase commitment.
             </p>
+            <ol className="mt-6 grid gap-3 text-sm text-navy">
+              <li className="flex gap-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center bg-navy text-xs font-semibold text-white">
+                  1
+                </span>
+                <span>Submit company and product details using the form.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center bg-navy text-xs font-semibold text-white">
+                  2
+                </span>
+                <span>Greatly Brands reviews category fit, terms, and channel suitability.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center bg-navy text-xs font-semibold text-white">
+                  3
+                </span>
+                <span>If the opportunity appears to be a fit, follow-up uses the contact details provided.</span>
+              </li>
+            </ol>
           </div>
           <div className="rounded-sm border border-line bg-white p-6 shadow-[0_8px_24px_rgba(12,30,56,0.04)] md:col-span-8 md:p-8">
             <SupplierForm />

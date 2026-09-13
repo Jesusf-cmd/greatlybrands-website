@@ -39,7 +39,8 @@ export function Hero() {
               alt="Organized consumer-product cartons and distribution shelving. Generic illustrative photography; not a Greatly Brands facility."
               fill
               priority
-              sizes="(max-width: 768px) 100vw, 40vw"
+              quality={75}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 560px"
               className="object-cover"
             />
           </div>

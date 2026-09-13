@@ -22,18 +22,24 @@ export async function storeInquiry(
     payload,
   };
 
-  await mkdir(DATA_DIR, { recursive: true });
-
-  let existing: StoredInquiry[] = [];
   try {
-    const raw = await readFile(DATA_FILE, "utf8");
-    existing = JSON.parse(raw) as StoredInquiry[];
-  } catch {
-    existing = [];
-  }
+    await mkdir(DATA_DIR, { recursive: true });
 
-  existing.push(inquiry);
-  await writeFile(DATA_FILE, JSON.stringify(existing, null, 2), "utf8");
+    let existing: StoredInquiry[] = [];
+    try {
+      const raw = await readFile(DATA_FILE, "utf8");
+      existing = JSON.parse(raw) as StoredInquiry[];
+    } catch {
+      existing = [];
+    }
+
+    existing.push(inquiry);
+    await writeFile(DATA_FILE, JSON.stringify(existing, null, 2), "utf8");
+  } catch {
+    // Serverless preview hosts are typically read-only outside /tmp.
+    // Validated inquiries still succeed; persistence is best-effort and local-only.
+    console.error("Inquiry file persistence unavailable");
+  }
 
   const webhook = process.env.GHL_WEBHOOK_URL;
   if (webhook) {

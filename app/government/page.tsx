@@ -37,7 +37,7 @@ export default function GovernmentPage() {
       />
 
       <section className="bg-white py-16 md:py-20">
-        <div className="container-site grid items-center gap-12 md:grid-cols-12">
+        <div className="container-site grid items-start gap-12 md:grid-cols-12">
           <div className="md:col-span-6">
             <h2 className="text-3xl font-semibold text-navy">Commercially available consumer products</h2>
             <p className="mt-5 text-muted">
@@ -69,7 +69,7 @@ export default function GovernmentPage() {
       </section>
 
       <section className="bg-paper py-16 md:py-20">
-        <div className="container-site grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="container-site grid gap-5 md:grid-cols-2">
           <CapabilityCard
             title="Federal Procurement Opportunities"
             description="Greatly Brands reviews eligible federal purchasing opportunities involving commercially available consumer products when those opportunities are a fit."
