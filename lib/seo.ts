@@ -23,7 +23,7 @@ export function buildMetadata(page: PageSeo): Metadata {
       locale: "en_US",
       images: [
         {
-          url: "/opengraph-image",
+          url: "/opengraph-image.png",
           width: 1200,
           height: 630,
           alt: "Greatly Brands — nationwide retail and procurement",
@@ -34,7 +34,7 @@ export function buildMetadata(page: PageSeo): Metadata {
       card: "summary_large_image",
       title: ogTitle,
       description,
-      images: ["/opengraph-image"],
+      images: ["/opengraph-image.png"],
     },
     robots: {
       index: true,
