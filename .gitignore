@@ -45,7 +45,10 @@ data/inquiries.json
 # hosting / local platforms
 .vercel/
 .wrangler/
+.open-next/
+.dev.vars
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+cloudflare-env.d.ts

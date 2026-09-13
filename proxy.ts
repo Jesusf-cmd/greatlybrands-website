@@ -8,15 +8,19 @@ export function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.replace(/\/+$/, "");
     const redirect = NextResponse.redirect(url, 308);
-    return withPreviewRobotHeaders(redirect);
+    return withPreviewRobotHeaders(redirect, request);
   }
 
-  return withPreviewRobotHeaders(NextResponse.next());
+  return withPreviewRobotHeaders(NextResponse.next(), request);
 }
 
-function withPreviewRobotHeaders(response: NextResponse) {
-  const env = process.env.VERCEL_ENV;
-  if (env && env !== "production") {
+function withPreviewRobotHeaders(response: NextResponse, request: NextRequest) {
+  const host = (request.headers.get("host") ?? "").split(":")[0].toLowerCase();
+  const isLiveDomain =
+    host === "greatlybrands.com" || host === "www.greatlybrands.com";
+  const vercelPreview = Boolean(process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production");
+
+  if (!isLiveDomain || vercelPreview) {
     response.headers.set("X-Robots-Tag", "noindex, nofollow");
   }
   return response;
