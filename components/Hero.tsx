@@ -3,15 +3,14 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowIcon, Button } from "@/components/Button";
-import { useCountUp, useInView } from "@/components/FadeIn";
 import { company } from "@/lib/company";
 import { purchasingCta, supplierCta } from "@/lib/navigation";
 
-const stats = [
-  { n: 9, suffix: "+", label: "Product Categories" },
-  { n: 2, suffix: " Channels", label: "Online Marketplaces" },
-  { n: 50, suffix: " States", label: "Nationwide Reach" },
-  { n: 3, suffix: " Sectors", label: "Consumer, Gov & Commercial" },
+const facts = [
+  { value: "9", label: "Product categories" },
+  { value: "U.S.", label: "Nationwide availability" },
+  { value: "Amazon", label: "Named marketplace" },
+  { value: "Walmart.com", label: "Named marketplace" },
 ];
 
 export function Hero() {
@@ -97,8 +96,8 @@ export function Hero() {
               transition: "opacity 0.9s ease 0.4s, transform 0.9s ease 0.4s",
             }}
           >
-            {company.name} connects manufacturers, brands, and distributors with
-            retail channels and purchasing organizations across the United States.
+            {company.name} works with manufacturers, brands, and distributors interested in
+            U.S. retail and purchasing relationships.
           </p>
 
           <div
@@ -119,7 +118,7 @@ export function Hero() {
           </div>
         </div>
 
-        <HeroStats loaded={loaded} />
+        <HeroFacts loaded={loaded} />
 
         <div
           className="mt-10 hidden flex-col items-center gap-2 md:flex"
@@ -135,52 +134,23 @@ export function Hero() {
   );
 }
 
-function HeroStats({ loaded }: { loaded: boolean }) {
-  const { ref, inView } = useInView(0.1);
+function HeroFacts({ loaded }: { loaded: boolean }) {
   return (
     <div
-      ref={ref}
       className="mt-20 grid grid-cols-2 gap-y-6 border-t border-white/8 pt-8 md:grid-cols-4"
       style={{
         opacity: loaded ? 1 : 0,
         transition: "opacity 0.9s ease 0.7s",
       }}
     >
-      {stats.map((stat, index) => (
-        <StatItem
-          key={stat.label}
-          target={stat.n}
-          suffix={stat.suffix}
-          label={stat.label}
-          active={inView}
-          delay={index * 120}
-        />
+      {facts.map((fact) => (
+        <div key={`${fact.value}-${fact.label}`}>
+          <div className="font-display mb-1 text-2xl leading-none font-semibold text-white">
+            {fact.value}
+          </div>
+          <div className="text-xs tracking-wide text-white/35">{fact.label}</div>
+        </div>
       ))}
-    </div>
-  );
-}
-
-function StatItem({
-  target,
-  suffix,
-  label,
-  active,
-  delay,
-}: {
-  target: number;
-  suffix: string;
-  label: string;
-  active: boolean;
-  delay: number;
-}) {
-  const n = useCountUp(target, active, 1600);
-  return (
-    <div style={{ transitionDelay: `${delay}ms` }}>
-      <div className="font-display mb-1 text-2xl leading-none font-semibold text-white">
-        {n}
-        {suffix}
-      </div>
-      <div className="text-xs tracking-wide text-white/35">{label}</div>
     </div>
   );
 }

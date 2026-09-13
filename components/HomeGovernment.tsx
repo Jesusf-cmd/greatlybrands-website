@@ -7,7 +7,7 @@ const areas = [
   "Household & facility supplies",
   "Hygiene and personal care",
   "Office products and consumables",
-  "General merchandise at scale",
+  "General merchandise",
   "Seasonal and recurring procurement",
 ];
 

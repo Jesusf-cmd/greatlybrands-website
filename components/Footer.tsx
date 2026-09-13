@@ -32,8 +32,8 @@ export function Footer() {
           <div>
             <Logo variant="white" />
             <p className="mt-5 max-w-[28ch] text-xs leading-relaxed text-white/35">
-              {company.legalName}. A U.S.-based multi-channel retail and procurement company
-              connecting brands with buyers nationwide.
+              {company.legalName}. A U.S.-based retail and procurement company serving a
+              nationwide United States service area.
             </p>
             <PhoneLink className="mt-6 inline-flex items-center gap-2 text-xs font-medium text-white/40 hover:text-white">
               <svg width="13" height="13" fill="none" viewBox="0 0 16 16" aria-hidden="true">

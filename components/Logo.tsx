@@ -8,19 +8,25 @@ type LogoProps = {
 };
 
 export function Logo({ variant = "navy", href = "/", className = "" }: LogoProps) {
+  const onDark = variant === "white";
   const inner = (
-    // Preserve the approved Canva artwork and its outlined wordmark.
-    // On dark chrome the Figma reference inverts this same file; do not swap in a new mark.
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={logo.src}
-      alt="Greatly Brands"
-      width={logo.width}
-      height={logo.height}
-      className={`h-10 w-auto shrink-0 md:h-11 ${
-        variant === "white" ? "brightness-0 invert" : ""
-      }`}
-    />
+    <span
+      className={
+        onDark
+          ? "inline-flex items-center rounded-md bg-white px-2.5 py-1 shadow-[0_0_0_1px_rgba(15,31,61,0.06)]"
+          : "inline-flex items-center"
+      }
+    >
+      {/* Approved color Precision G on a light field. Do not invert or replace the artwork. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={logo.src}
+        alt="Greatly Brands"
+        width={logo.width}
+        height={logo.height}
+        className="h-8 w-auto max-w-[10.5rem] shrink-0 md:h-9 md:max-w-[12rem]"
+      />
+    </span>
   );
   const classes = `inline-flex shrink-0 items-center rounded-sm ${className}`;
   return href ? (

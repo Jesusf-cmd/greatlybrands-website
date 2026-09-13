@@ -28,10 +28,10 @@ const steps = [
 
 const benefits = [
   "Repeat purchasing potential",
-  "Nationwide distribution",
+  "U.S. service area",
   "Broad category range",
-  "Multiple retail channels",
-  "Long-term accounts",
+  "Named marketplace channels",
+  "Long-term account potential",
   "Direct point of contact",
 ];
 

@@ -13,7 +13,7 @@ export const pages = {
     path: "/",
     title: "Nationwide Retail & Procurement Partner | Greatly Brands",
     description:
-      "Greatly Brands is a U.S. multi-channel retailer and procurement company purchasing consumer products from brands, manufacturers, and distributors for nationwide resale.",
+      "Greatly Brands is a U.S.-based retail and procurement company. We work with manufacturers, brands, and distributors interested in retail and purchasing relationships. Service area is the United States.",
     h1: "Nationwide Retail & Procurement Partner",
   },
   about: {

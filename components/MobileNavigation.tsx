@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/Button";
+import { Logo } from "@/components/Logo";
 import { headerNav, purchasingCta, supplierCta } from "@/lib/navigation";
 
 export function MobileNavigation() {
@@ -11,7 +12,7 @@ export function MobileNavigation() {
   const [open, setOpen] = useState(false);
   const [menuPath, setMenuPath] = useState(pathname);
   const panelId = useId();
-  const closeRef = useRef<HTMLButtonElement>(null);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
   if (pathname !== menuPath) {
     setMenuPath(pathname);
@@ -23,7 +24,7 @@ export function MobileNavigation() {
 
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
+    firstLinkRef.current?.focus();
 
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") setOpen(false);
@@ -65,12 +66,16 @@ export function MobileNavigation() {
           className="absolute inset-x-0 top-full border-t border-white/10 bg-navy-deep/95 shadow-xl backdrop-blur-md"
         >
           <div className="space-y-1 px-6 py-4">
-            {headerNav.map((item) => {
+            <div className="pb-3">
+              <Logo variant="white" href="/" />
+            </div>
+            {headerNav.map((item, index) => {
               const active = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
+                  ref={index === 0 ? firstLinkRef : undefined}
                   className="block border-b border-white/6 py-3 text-sm font-medium text-white/70"
                   aria-current={active ? "page" : undefined}
                   onClick={() => setOpen(false)}
@@ -87,9 +92,6 @@ export function MobileNavigation() {
                 {purchasingCta.label}
               </Button>
             </div>
-            <button ref={closeRef} type="button" className="sr-only" onClick={() => setOpen(false)}>
-              Close menu
-            </button>
           </div>
         </div>
       ) : null}

@@ -5,12 +5,12 @@ import { company } from "@/lib/company";
 const pillars = [
   {
     icon: "🏠",
-    title: "Nationwide Reach",
-    body: "Consumer products sourced for customers throughout the United States.",
+    title: "U.S. Service Area",
+    body: "Service area is the United States.",
   },
   {
     icon: "🛒",
-    title: "Multi-Channel Retail",
+    title: "Named Retail Channels",
     body: "Products may be offered through established U.S. online retail channels, including Amazon and Walmart.com.",
   },
   {
@@ -36,9 +36,9 @@ export function HomeAbout() {
               A procurement company built for lasting relationships.
             </h2>
             <p className="mb-5 max-w-[42ch] text-[1.05rem] leading-relaxed text-muted">
-              {company.name} is a U.S.-based multi-channel retail and procurement company. We
-              connect manufacturers, brand owners, distributors, and wholesalers with consumers
-              and purchasing organizations nationwide.
+              {company.name} is a U.S.-based retail and procurement company. We work with
+              manufacturers, brand owners, distributors, and wholesalers interested in retail
+              and purchasing relationships in the United States.
             </p>
             <p className="max-w-[40ch] leading-relaxed text-muted-soft">
               We evaluate partners carefully — prioritizing repeat purchasing potential, broad
@@ -50,7 +50,7 @@ export function HomeAbout() {
                   {company.address.city}, {company.address.stateCode}
                 </div>
                 <div className="mt-0.5 text-xs tracking-wide text-warm-muted uppercase">
-                  Headquarters
+                  Business address
                 </div>
               </div>
               <div>

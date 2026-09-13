@@ -3,7 +3,7 @@
 import { productCategories } from "@/lib/categories";
 import { marketplaceChannels } from "@/lib/company";
 
-const extra = ["Federal Procurement", "Nationwide Distribution"];
+const extra = ["Government inquiries", "United States"];
 
 export function Marquee() {
   const items = [

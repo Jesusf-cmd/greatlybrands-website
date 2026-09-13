@@ -24,8 +24,8 @@ export function HomeRetail() {
                 }}
               />
             </div>
-            <div className="absolute -right-3 -bottom-5 rounded-2xl border border-[#eae8e3] bg-white px-5 py-4 shadow-xl">
-              <div className="mb-1 text-xs font-semibold text-warm-muted">Active On</div>
+            <div className="absolute right-3 bottom-3 rounded-2xl border border-[#eae8e3] bg-white px-5 py-4 shadow-xl md:right-[-12px] md:bottom-[-20px]">
+              <div className="mb-1 text-xs font-semibold text-warm-muted">Named channels</div>
               <div className="flex items-center gap-2">
                 {marketplaceChannels.map((channel, index) => (
                   <span key={channel} className="flex items-center gap-2">
@@ -40,11 +40,11 @@ export function HomeRetail() {
           <FadeIn delay={150}>
             <SectionLabel>Retail Distribution</SectionLabel>
             <h2 className="font-display mb-6 text-[clamp(2rem,3.5vw,2.8rem)] leading-tight text-navy">
-              Established channels, proven reach.
+              Established channels, identified by name.
             </h2>
             <p className="mb-8 max-w-[40ch] text-[1.05rem] leading-relaxed text-muted">
-              Greatly Brands participates in established U.S. online retail channels. Products
-              may be offered through major online marketplaces including Amazon and Walmart.com.
+              Greatly Brands may offer products through established U.S. online retail
+              channels, including Amazon and Walmart.com.
             </p>
             <div className="mb-8 grid grid-cols-2 gap-3">
               {marketplaceChannels.map((channel) => (
@@ -53,14 +53,14 @@ export function HomeRetail() {
                   className="rounded-xl border border-[#e2e0da] bg-paper px-5 py-4 text-center"
                 >
                   <div className="mb-0.5 text-sm font-semibold text-navy">{channel}</div>
-                  <div className="text-xs text-warm-muted">Marketplace channel</div>
+                  <div className="text-xs text-warm-muted">Name used for identification</div>
                 </div>
               ))}
             </div>
             <p className="max-w-[40ch] text-xs leading-relaxed text-[#b0aa9f]">
               Amazon and Walmart.com are trademarks of their respective owners. References are
-              for identification purposes only and do not imply endorsement or affiliation.
-              Greatly Brands is an independent retail participant on those platforms.
+              for identification purposes only and do not imply endorsement, affiliation, or
+              active seller status.
             </p>
           </FadeIn>
         </div>
