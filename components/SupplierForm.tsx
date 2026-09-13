@@ -76,13 +76,17 @@ export function SupplierForm() {
 
   if (status === "success") {
     return (
-      <p className="rounded-sm border border-line bg-paper p-5 text-navy" role="status">
-        Thank you. Your supplier inquiry has been received for review.
+      <p className="rounded-2xl border border-line bg-cream p-8 text-center" role="status">
+        <span className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-soft text-indigo">
+          ✓
+        </span>
+        <span className="font-display mt-3 block text-lg text-navy">Thank you.</span>
+        Your supplier inquiry has been received for review.
       </p>
     );
   }
 
-  const fieldClass = "w-full rounded-sm border border-line bg-white px-3 py-2.5";
+  const fieldClass = "field-input";
 
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-5" onFocus={onStart}>
@@ -284,7 +288,7 @@ export function SupplierForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex min-h-11 items-center justify-center rounded-sm bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-hover disabled:opacity-60"
+        className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-linear-to-br from-indigo to-blue px-5 py-3.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60"
       >
         {status === "submitting" ? "Sending..." : "Submit supplier inquiry"}
       </button>

@@ -1,6 +1,14 @@
 import Link from "next/link";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "onDark" | "onDarkSecondary";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "ghost"
+  | "onDark"
+  | "onDarkSecondary"
+  | "pill"
+  | "pillBright"
+  | "pillOutline";
 
 type ButtonProps = {
   href?: string;
@@ -14,14 +22,19 @@ type ButtonProps = {
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "bg-blue text-white hover:bg-blue-hover border border-blue hover:border-blue-hover",
+    "rounded-full bg-indigo text-white hover:opacity-90 border border-indigo",
   secondary:
-    "bg-white text-navy border border-navy/20 hover:border-navy hover:bg-paper",
-  ghost: "bg-transparent text-navy hover:bg-paper border border-transparent",
+    "rounded-full bg-white text-navy border border-navy/20 hover:border-navy hover:bg-paper",
+  ghost: "rounded-full bg-transparent text-navy hover:bg-paper border border-transparent",
   onDark:
-    "bg-blue text-white hover:bg-blue-hover border border-blue",
+    "rounded-full bg-indigo text-white hover:opacity-90 border border-indigo hover:shadow-[0_0_32px_rgba(67,56,202,0.5)]",
   onDarkSecondary:
-    "bg-transparent text-white border border-white/35 hover:border-white hover:bg-white/10",
+    "rounded-full bg-transparent text-white border border-white/20 hover:bg-white/10",
+  pill: "rounded-full bg-indigo text-white hover:opacity-90 hover:shadow-[0_0_32px_rgba(67,56,202,0.5)] border border-transparent",
+  pillBright:
+    "rounded-full bg-blue text-white hover:opacity-90 border border-transparent",
+  pillOutline:
+    "rounded-full bg-transparent text-white border border-white/25 hover:bg-white/10",
 };
 
 export function Button({
@@ -33,7 +46,7 @@ export function Button({
   disabled,
   onClick,
 }: ButtonProps) {
-  const classes = `inline-flex min-h-11 items-center justify-center rounded-sm px-5 py-3 text-sm font-semibold tracking-wide transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${className}`;
+  const classes = `inline-flex min-h-11 items-center justify-center gap-2.5 px-5 py-3 text-sm font-semibold tracking-wide transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${className}`;
 
   if (href) {
     return (
@@ -47,5 +60,26 @@ export function Button({
     <button type={type} className={classes} disabled={disabled} onClick={onClick}>
       {children}
     </button>
+  );
+}
+
+export function ArrowIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      fill="none"
+      viewBox="0 0 16 16"
+      className={`transition-transform duration-300 group-hover:translate-x-1 ${className}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M3 8h10M9 4l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

@@ -1,17 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --navy: #0c1e38;
-  --navy-deep: #071525;
-  --navy-mid: #16325c;
-  --blue: #1f5bd8;
-  --blue-bright: #2b6be4;
-  --blue-hover: #1648b0;
-  --blue-soft: #e8f1fc;
-  --ink: #1b2430;
-  --muted: #5c6b7a;
-  --line: #e2e8f0;
-  --paper: #f5f7fa;
+  --navy: #0f1f3d;
+  --navy-deep: #080e1c;
+  --navy-mid: #162646;
+  --navy-hero: #090f1e;
+  --indigo: #4338ca;
+  --indigo-light: #6366f1;
+  --indigo-soft: #818cf8;
+  --blue: #3b82f6;
+  --blue-bright: #3b82f6;
+  --blue-hover: #2563eb;
+  --blue-soft: #ede9fe;
+  --ink: #0f1f3d;
+  --muted: #5a6170;
+  --muted-soft: #8a909c;
+  --line: #eae8e3;
+  --line-warm: #e2e0da;
+  --cream: #faf9f6;
+  --paper: #f5f4f0;
+  --warm-gray: #e8e6e0;
+  --warm-muted: #9c9589;
   --white: #ffffff;
 }
 
@@ -19,17 +28,27 @@
   --color-navy: var(--navy);
   --color-navy-deep: var(--navy-deep);
   --color-navy-mid: var(--navy-mid);
+  --color-navy-hero: var(--navy-hero);
+  --color-indigo: var(--indigo);
+  --color-indigo-light: var(--indigo-light);
+  --color-indigo-soft: var(--indigo-soft);
   --color-blue: var(--blue);
   --color-blue-bright: var(--blue-bright);
   --color-blue-hover: var(--blue-hover);
   --color-blue-soft: var(--blue-soft);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
+  --color-muted-soft: var(--muted-soft);
   --color-line: var(--line);
+  --color-line-warm: var(--line-warm);
+  --color-cream: var(--cream);
   --color-paper: var(--paper);
+  --color-warm-gray: var(--warm-gray);
+  --color-warm-muted: var(--warm-muted);
   --color-white: var(--white);
-  --font-sans: var(--font-ibm);
-  --shadow-card: 0 8px 24px rgba(12, 30, 56, 0.06);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-dm-serif);
+  --shadow-card: 0 12px 40px rgba(15, 31, 61, 0.08);
   --shadow-header: 0 1px 0 rgba(12, 30, 56, 0.08);
 }
 
@@ -40,35 +59,40 @@ html {
 
 html,
 body {
-  background: var(--white);
+  background: var(--cream);
   color: var(--ink);
 }
 
 body {
-  font-family: var(--font-ibm), "IBM Plex Sans", Helvetica, Arial, sans-serif;
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
   font-size: 1.0625rem;
   line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: #d6e4ff;
+  background: #ddd6fe;
   color: var(--navy);
 }
 
 :focus-visible {
-  outline: 2px solid var(--blue);
+  outline: 2px solid var(--indigo);
   outline-offset: 3px;
 }
 
 .container-site {
-  width: min(100% - 2rem, 72rem);
+  width: min(100% - 2rem, 80rem);
   margin-inline: auto;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .container-site {
-    width: min(100% - 4rem, 80rem);
+    width: min(100% - 3rem, 80rem);
   }
+}
+
+.font-display {
+  font-family: var(--font-dm-serif), "DM Serif Display", Georgia, serif;
 }
 
 .eyebrow {
@@ -77,7 +101,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--indigo);
 }
 
 .prose-gb > p + p {
@@ -85,7 +109,7 @@ body {
 }
 
 .prose-gb a {
-  color: var(--blue);
+  color: var(--indigo);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -109,8 +133,71 @@ textarea {
   font: inherit;
 }
 
+.field-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--line-warm);
+  background: var(--cream);
+  padding: 0.625rem 0.875rem;
+  color: var(--navy);
+  outline: none;
+}
+
+.field-input:focus {
+  border-color: var(--indigo);
+  box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200%);
+    opacity: 0;
+  }
+}
+
+.animate-marquee {
+  animation: marquee 36s linear infinite;
+}
+
+.animate-scroll-cue {
+  animation: scroll-cue 1.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee,
+  .animate-scroll-cue {
+    animation: none !important;
   }
 }
