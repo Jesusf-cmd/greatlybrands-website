@@ -38,22 +38,13 @@ export const contactReasons = [
   "Other",
 ] as const;
 
-export const supplierRelationships = [
+export const supplierCompanyTypes = [
   "Manufacturer",
-  "Brand owner",
-  "Master distributor",
-  "Authorized distributor",
+  "Brand Owner",
+  "Authorized Distributor",
   "Wholesaler",
   "Importer",
-  "Established product supplier",
   "Other",
-] as const;
-
-export const nationwideRightsOptions = [
-  "Yes",
-  "No",
-  "Regional / limited",
-  "Unsure",
 ] as const;
 
 /**

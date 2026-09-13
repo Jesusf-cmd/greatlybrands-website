@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "Select a valid inquiry reason." }, { status: 400 });
   }
 
-  await storeInquiry("contact", {
+  await storeInquiry(reason === "Government Purchasing" ? "government" : "contact", {
     name,
     company: companyName,
     email,

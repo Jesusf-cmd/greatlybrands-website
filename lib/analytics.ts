@@ -1,7 +1,9 @@
 export type AnalyticsEvent =
-  | "form_start"
-  | "form_submit"
+  | "contact_form_start"
+  | "contact_form_submit"
+  | "supplier_form_start"
   | "supplier_form_submit"
+  | "government_inquiry_start"
   | "government_inquiry_submit"
   | "phone_click";
 

@@ -19,11 +19,11 @@ const initial = {
 
 export function ContactForm({
   defaultReason = "",
-  eventName = "form_submit",
+  inquiryType = "contact",
   submitLabel = "Send message",
 }: {
   defaultReason?: string;
-  eventName?: "form_submit" | "government_inquiry_submit";
+  inquiryType?: "contact" | "government";
   submitLabel?: string;
 }) {
   const [values, setValues] = useState({ ...initial, reason: defaultReason });
@@ -34,7 +34,11 @@ export function ContactForm({
   function onStart() {
     if (started) return;
     setStarted(true);
-    trackEvent("form_start", { form: eventName === "government_inquiry_submit" ? "government" : "contact" });
+    if (inquiryType === "government" || values.reason === "Government Purchasing") {
+      trackEvent("government_inquiry_start", { form: "government" });
+    } else {
+      trackEvent("contact_form_start", { form: "contact" });
+    }
   }
 
   function validate() {
@@ -62,8 +66,8 @@ export function ContactForm({
         body: JSON.stringify(values),
       });
       if (!response.ok) throw new Error("Request failed");
-      trackEvent("form_submit", { form: "contact", reason: values.reason });
-      if (eventName === "government_inquiry_submit" || values.reason === "Government Purchasing") {
+      trackEvent("contact_form_submit", { form: "contact", reason: values.reason });
+      if (inquiryType === "government" || values.reason === "Government Purchasing") {
         trackEvent("government_inquiry_submit", { form: "contact" });
       }
       setStatus("success");
@@ -75,9 +79,8 @@ export function ContactForm({
 
   if (status === "success") {
     return (
-      <p className="rounded-md border border-line bg-paper p-5 text-navy" role="status">
-        Thank you. Your inquiry has been received. Greatly Brands will follow up using
-        the contact details you provided.
+      <p className="rounded-sm border border-line bg-paper p-5 text-navy" role="status">
+        Thank you. Your inquiry has been received.
       </p>
     );
   }
@@ -126,7 +129,7 @@ export function ContactForm({
           />
         </Field>
       </div>
-      <Field label="Reason for contacting us" error={errors.reason} required>
+      <Field label="Reason for Contact" error={errors.reason} required>
         <select
           id="contact-reason"
           name="reason"
@@ -169,7 +172,7 @@ export function ContactForm({
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center rounded-sm bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-hover disabled:opacity-60"
+        className="inline-flex min-h-11 items-center justify-center rounded-sm bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-hover disabled:opacity-60"
       >
         {status === "submitting" ? "Sending..." : submitLabel}
       </button>

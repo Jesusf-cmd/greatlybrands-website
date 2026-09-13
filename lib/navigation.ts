@@ -17,6 +17,7 @@ export const footerNav: NavItem[] = [
   { href: "/about", label: "About" },
   { href: "/suppliers", label: "Suppliers" },
   { href: "/products", label: "Product Categories" },
+  { href: "/retail", label: "Retail" },
   { href: "/government", label: "Government" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy Policy" },

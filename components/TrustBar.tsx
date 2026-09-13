@@ -1,11 +1,11 @@
 const items = [
   {
-    title: "Nationwide Distribution",
+    title: "Nationwide Reach",
     copy: "Consumer products sourced for customers throughout the United States.",
   },
   {
     title: "Multi-Channel Retail",
-    copy: "Marketplace retail channels including Amazon and Walmart.com.",
+    copy: "Products may be offered through established U.S. online retail channels.",
   },
   {
     title: "Broad Product Categories",

@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { productCategories } from "@/lib/categories";
-import {
-  nationwideRightsOptions,
-  supplierRelationships,
-} from "@/lib/company";
+import { supplierCompanyTypes } from "@/lib/company";
 import { isValidEmail, isValidPhone, isValidWebsite, sanitizeText } from "@/lib/validation";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -17,12 +14,12 @@ const initial = {
   email: "",
   phone: "",
   websiteUrl: "",
+  companyType: "",
   categories: "",
   brands: "",
-  relationship: "",
   minimumOrder: "",
-  nationwideRights: "",
   message: "",
+  authorized: false,
   fax: "",
 };
 
@@ -35,7 +32,7 @@ export function SupplierForm() {
   function onStart() {
     if (started) return;
     setStarted(true);
-    trackEvent("form_start", { form: "supplier" });
+    trackEvent("supplier_form_start", { form: "supplier" });
   }
 
   function validate() {
@@ -47,7 +44,7 @@ export function SupplierForm() {
     if (values.websiteUrl && !isValidWebsite(values.websiteUrl)) {
       next.websiteUrl = "Enter a valid website.";
     }
-    if (!values.relationship) next.relationship = "Select the supplier relationship type.";
+    if (!values.companyType) next.companyType = "Select a company type.";
     if (!sanitizeText(values.message, 5000)) {
       next.message = "Tell us about the products you would like Greatly Brands to consider.";
     }
@@ -63,10 +60,12 @@ export function SupplierForm() {
       const response = await fetch("/api/suppliers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          authorized: values.authorized ? "yes" : "no",
+        }),
       });
       if (!response.ok) throw new Error("Request failed");
-      trackEvent("form_submit", { form: "supplier" });
       trackEvent("supplier_form_submit", { form: "supplier" });
       setStatus("success");
       setValues(initial);
@@ -77,22 +76,20 @@ export function SupplierForm() {
 
   if (status === "success") {
     return (
-      <p className="rounded-md border border-line bg-paper p-5 text-navy" role="status">
-        Thank you. Your supplier inquiry has been received. A Greatly Brands team
-        member will review the information and follow up if there is a potential fit.
+      <p className="rounded-sm border border-line bg-paper p-5 text-navy" role="status">
+        Thank you. Your supplier inquiry has been received for review.
       </p>
     );
   }
 
-  const fieldClass =
-    "w-full rounded-sm border border-line bg-white px-3 py-2.5";
+  const fieldClass = "w-full rounded-sm border border-line bg-white px-3 py-2.5";
 
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-5" onFocus={onStart}>
       <div className="grid gap-5 md:grid-cols-2">
         <div className="grid gap-2">
           <label htmlFor="supplier-company" className="text-sm font-medium text-navy">
-            Company name <span className="text-blue">*</span>
+            Company Name <span className="text-blue">*</span>
           </label>
           <input
             id="supplier-company"
@@ -104,7 +101,7 @@ export function SupplierForm() {
         </div>
         <div className="grid gap-2">
           <label htmlFor="supplier-contact" className="text-sm font-medium text-navy">
-            Contact name <span className="text-blue">*</span>
+            Contact Name <span className="text-blue">*</span>
           </label>
           <input
             id="supplier-contact"
@@ -119,7 +116,7 @@ export function SupplierForm() {
       <div className="grid gap-5 md:grid-cols-2">
         <div className="grid gap-2">
           <label htmlFor="supplier-email" className="text-sm font-medium text-navy">
-            Business email <span className="text-blue">*</span>
+            Business Email <span className="text-blue">*</span>
           </label>
           <input
             id="supplier-email"
@@ -146,75 +143,75 @@ export function SupplierForm() {
           {errors.phone ? <p className="text-sm text-red-700">{errors.phone}</p> : null}
         </div>
       </div>
-      <div className="grid gap-2">
-        <label htmlFor="supplier-website" className="text-sm font-medium text-navy">
-          Website
-        </label>
-        <input
-          id="supplier-website"
-          className={fieldClass}
-          inputMode="url"
-          placeholder="https://"
-          value={values.websiteUrl}
-          onChange={(e) => setValues({ ...values, websiteUrl: e.target.value })}
-        />
-        {errors.websiteUrl ? <p className="text-sm text-red-700">{errors.websiteUrl}</p> : null}
-      </div>
       <div className="grid gap-5 md:grid-cols-2">
         <div className="grid gap-2">
-          <label htmlFor="supplier-categories" className="text-sm font-medium text-navy">
-            Product categories
+          <label htmlFor="supplier-website" className="text-sm font-medium text-navy">
+            Website
           </label>
-          <select
-            id="supplier-categories"
+          <input
+            id="supplier-website"
             className={fieldClass}
-            value={values.categories}
-            onChange={(e) => setValues({ ...values, categories: e.target.value })}
-          >
-            <option value="">Select a primary category</option>
-            {productCategories.map((category) => (
-              <option key={category.slug} value={category.name}>
-                {category.name}
-              </option>
-            ))}
-            <option value="Multiple categories">Multiple categories</option>
-          </select>
+            inputMode="url"
+            placeholder="https://"
+            value={values.websiteUrl}
+            onChange={(e) => setValues({ ...values, websiteUrl: e.target.value })}
+          />
+          {errors.websiteUrl ? <p className="text-sm text-red-700">{errors.websiteUrl}</p> : null}
         </div>
         <div className="grid gap-2">
-          <label htmlFor="supplier-relationship" className="text-sm font-medium text-navy">
-            Distributor / manufacturer relationship <span className="text-blue">*</span>
+          <label htmlFor="supplier-type" className="text-sm font-medium text-navy">
+            Company Type <span className="text-blue">*</span>
           </label>
           <select
-            id="supplier-relationship"
+            id="supplier-type"
             className={fieldClass}
-            value={values.relationship}
-            onChange={(e) => setValues({ ...values, relationship: e.target.value })}
+            value={values.companyType}
+            onChange={(e) => setValues({ ...values, companyType: e.target.value })}
           >
-            <option value="">Select a relationship</option>
-            {supplierRelationships.map((item) => (
+            <option value="">Select a company type</option>
+            {supplierCompanyTypes.map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>
             ))}
           </select>
-          {errors.relationship ? <p className="text-sm text-red-700">{errors.relationship}</p> : null}
+          {errors.companyType ? <p className="text-sm text-red-700">{errors.companyType}</p> : null}
         </div>
       </div>
       <div className="grid gap-2">
-        <label htmlFor="supplier-brands" className="text-sm font-medium text-navy">
-          Brands represented
+        <label htmlFor="supplier-categories" className="text-sm font-medium text-navy">
+          Product Categories
         </label>
-        <input
-          id="supplier-brands"
+        <select
+          id="supplier-categories"
           className={fieldClass}
-          value={values.brands}
-          onChange={(e) => setValues({ ...values, brands: e.target.value })}
-        />
+          value={values.categories}
+          onChange={(e) => setValues({ ...values, categories: e.target.value })}
+        >
+          <option value="">Select a primary category</option>
+          {productCategories.map((category) => (
+            <option key={category.slug} value={category.name}>
+              {category.name}
+            </option>
+          ))}
+          <option value="Multiple categories">Multiple categories</option>
+        </select>
       </div>
       <div className="grid gap-5 md:grid-cols-2">
         <div className="grid gap-2">
+          <label htmlFor="supplier-brands" className="text-sm font-medium text-navy">
+            Brands Represented
+          </label>
+          <input
+            id="supplier-brands"
+            className={fieldClass}
+            value={values.brands}
+            onChange={(e) => setValues({ ...values, brands: e.target.value })}
+          />
+        </div>
+        <div className="grid gap-2">
           <label htmlFor="supplier-moq" className="text-sm font-medium text-navy">
-            Minimum order requirements
+            Minimum Order Requirements
           </label>
           <input
             id="supplier-moq"
@@ -222,24 +219,6 @@ export function SupplierForm() {
             value={values.minimumOrder}
             onChange={(e) => setValues({ ...values, minimumOrder: e.target.value })}
           />
-        </div>
-        <div className="grid gap-2">
-          <label htmlFor="supplier-rights" className="text-sm font-medium text-navy">
-            Nationwide distribution rights, if applicable
-          </label>
-          <select
-            id="supplier-rights"
-            className={fieldClass}
-            value={values.nationwideRights}
-            onChange={(e) => setValues({ ...values, nationwideRights: e.target.value })}
-          >
-            <option value="">Select an option</option>
-            {nationwideRightsOptions.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
         </div>
       </div>
       <div className="grid gap-2">
@@ -254,6 +233,18 @@ export function SupplierForm() {
           onChange={(e) => setValues({ ...values, message: e.target.value })}
         />
         {errors.message ? <p className="text-sm text-red-700">{errors.message}</p> : null}
+      </div>
+      <div className="flex items-start gap-3">
+        <input
+          id="supplier-authorized"
+          type="checkbox"
+          className="mt-1 h-4 w-4 rounded-sm border-line"
+          checked={values.authorized}
+          onChange={(e) => setValues({ ...values, authorized: e.target.checked })}
+        />
+        <label htmlFor="supplier-authorized" className="text-sm text-muted">
+          I confirm that I am authorized to discuss the products or brands referenced in this inquiry.
+        </label>
       </div>
       <p className="hidden" aria-hidden="true">
         <label htmlFor="supplier-fax">Fax</label>
@@ -273,7 +264,7 @@ export function SupplierForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center rounded-sm bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-hover disabled:opacity-60"
+        className="inline-flex min-h-11 items-center justify-center rounded-sm bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-hover disabled:opacity-60"
       >
         {status === "submitting" ? "Sending..." : "Submit supplier inquiry"}
       </button>

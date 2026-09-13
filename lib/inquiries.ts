@@ -48,7 +48,7 @@ export async function storeInquiry(
               ? "supplier_form_submit"
               : type === "government"
                 ? "government_inquiry_submit"
-                : "form_submit",
+                : "contact_form_submit",
           inquiry,
         }),
       });

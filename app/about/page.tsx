@@ -4,12 +4,20 @@ import { PageHero } from "@/components/PageHero";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SupplierCTA } from "@/components/SupplierCTA";
 import { Button } from "@/components/Button";
-import { company } from "@/lib/company";
+import { formatAddress } from "@/lib/company";
 import { pages } from "@/lib/pages";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata(pages.about);
+
+const howWeWork = [
+  "Identify viable supply relationships",
+  "Evaluate product and category fit",
+  "Establish purchasing terms",
+  "Bring products into appropriate retail channels",
+  "Grow successful relationships over time",
+];
 
 export default function AboutPage() {
   return (
@@ -30,48 +38,37 @@ export default function AboutPage() {
       <PageHero
         eyebrow="Company"
         title={pages.about.h1}
-        description="Greatly Brands, operated by Greatly LLC, is a Tulsa, Oklahoma-based retail and procurement company focused on building reliable purchasing relationships with brands, distributors, and manufacturers across a wide range of consumer product categories."
+        description="Greatly Brands, operated by Greatly LLC, is a Tulsa, Oklahoma-based retail and procurement company serving customers and business partners throughout the United States."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "About" },
         ]}
       />
 
-      <section className="bg-white py-20">
+      <section className="bg-white py-16 md:py-20">
         <div className="container-site grid items-start gap-12 md:grid-cols-12">
           <div className="prose-gb md:col-span-7">
-            <h2 className="text-3xl font-semibold text-navy">A nationwide retail company based in Tulsa</h2>
+            <h2 className="text-3xl font-semibold text-navy">A nationwide retail and procurement company</h2>
             <p className="mt-5 text-muted">
-              {company.legalName} purchases consumer products from manufacturers,
-              brands, authorized distributors, wholesalers, and other legitimate
-              supply channels. Those products are resold through major U.S.
-              marketplaces and other retail channels to customers throughout the
-              United States.
+              Greatly Brands works with manufacturers, brand owners, authorized
+              distributors, wholesalers, and other legitimate supply partners to
+              purchase consumer products for resale. Products may be offered
+              through established U.S. online retail channels, including Amazon
+              and Walmart.com, and to commercial and government purchasing
+              organizations where the opportunity is a fit.
             </p>
             <p className="text-muted">
-              The website is built for supplier, commercial, and government
-              audiences. It is not a consumer shopping catalog. Product pages
-              present categories of merchandise Greatly Brands may purchase and
-              distribute, not individual SKU inventory.
+              The company sources across a range of consumer-product categories
+              depending on demand, supply availability, supplier agreements,
+              category economics, and channel suitability. This website is
+              intended for supplier, commercial, and public-sector audiences. It
+              is not a consumer shopping catalog.
             </p>
-            <h2 className="mt-12 text-3xl font-semibold text-navy">How the company works</h2>
-            <p className="mt-5 text-muted">
-              Greatly Brands concentrates on professional purchasing,
-              multi-channel retail distribution, and responsible expansion. The
-              operating model emphasizes:
-            </p>
-            <ul className="text-muted">
-              <li>Supplier relationships with legitimate product sources</li>
-              <li>Nationwide commerce through established retail channels</li>
-              <li>Product sourcing across multiple consumer categories</li>
-              <li>Clear purchasing communication</li>
-              <li>Category expansion when demand and economics support it</li>
-            </ul>
             <p className="text-muted">
-              The business address is {company.address.line1}, {company.address.line2},{" "}
-              {company.address.city}, {company.address.state} {company.address.postalCode}.
-              This is the company&apos;s business address and should not be treated
-              as a walk-in storefront, warehouse, or public showroom.
+              The business address is {formatAddress("full")}. This is a
+              business address for correspondence and should not be treated as a
+              walk-in storefront, warehouse, distribution center, showroom, or
+              fulfillment center.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/suppliers">Become a Supplier</Button>
@@ -81,7 +78,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="md:col-span-5">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-md border border-line">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-line">
               <Image
                 src="/images/section-about.webp"
                 alt="Urban commercial buildings representing national business operations, used as generic illustrative photography."
@@ -98,12 +95,27 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-paper py-20">
-        <div className="container-site">
-          <SectionHeader
-            title="What we do not claim here"
-            description="This page includes only confirmed company facts. Additional history, credentials, storefront URLs, and registrations can be added when they are verified."
-          />
+      <section className="bg-paper py-16 md:py-20">
+        <div className="container-site grid gap-10 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <SectionHeader
+              title="How We Work"
+              description="Greatly Brands concentrates on identifying suitable supply relationships, evaluating category fit, and placing products into appropriate retail channels over time."
+            />
+          </div>
+          <ol className="grid gap-4 md:col-span-7">
+            {howWeWork.map((step, index) => (
+              <li
+                key={step}
+                className="flex gap-4 border border-line bg-white p-5"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-navy text-sm font-semibold text-white">
+                  {index + 1}
+                </span>
+                <span className="pt-1 font-medium text-navy">{step}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
