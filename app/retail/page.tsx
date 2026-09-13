@@ -29,28 +29,32 @@ export default function RetailPage() {
       <PageHero
         eyebrow="Retail"
         title={pages.retail.h1}
-        description="Greatly Brands participates in online retail channels and may expand distribution according to supplier agreements and business opportunities."
+        description="Greatly Brands participates in online retail channels that can make suitable consumer products available to customers throughout the United States."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Retail" },
         ]}
       />
 
-      <section className="bg-white py-20">
+      <section className="bg-white py-16 md:py-20">
         <div className="container-site grid items-center gap-12 md:grid-cols-12">
           <div className="md:col-span-6">
-            <h2 className="text-3xl font-semibold text-navy">Marketplace retail channels</h2>
+            <h2 className="text-3xl font-semibold text-navy">Online marketplace commerce</h2>
             <p className="mt-5 text-muted">
-              Products sold through major U.S. online marketplaces help Greatly
-              Brands reach consumers nationwide. Current marketplace retail
-              channels include Amazon and Walmart.com. Those names identify sales
-              channels. They do not mean Greatly Brands is owned by, endorsed by,
-              affiliated with, or officially partnered with those companies.
+              Products may be offered through major online marketplaces including
+              Amazon and Walmart.com. Those names identify sales channels. They
+              do not mean Greatly Brands is owned by, endorsed by, affiliated
+              with, or officially partnered with those companies.
             </p>
             <p className="mt-4 text-muted">
               Multi-channel retail distribution may expand as supplier agreements,
               category demand, and operational capacity support additional
               channels.
+            </p>
+            <p className="mt-4 text-sm text-muted">
+              Marketplace names are trademarks of their respective owners.
+              References are for identification purposes only and do not imply
+              endorsement or affiliation.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/suppliers">Become a Supplier</Button>
@@ -59,7 +63,7 @@ export default function RetailPage() {
               </Button>
             </div>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-line md:col-span-6">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-line md:col-span-6">
             <Image
               src="/images/section-retail.webp"
               alt="A customer completing a retail purchase, used to illustrate online marketplace commerce."
@@ -71,31 +75,27 @@ export default function RetailPage() {
         </div>
       </section>
 
-      <section className="bg-paper py-20">
+      <section className="bg-paper py-16 md:py-20">
         <div className="container-site">
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             <CapabilityCard
-              title="Nationwide consumer reach"
+              title="Nationwide Customer Reach"
               description="Retail activity is directed to customers throughout the United States rather than a single local market."
             />
             <CapabilityCard
-              title="Online marketplace sales"
-              description="Greatly Brands sells through established marketplace retail channels, including Amazon and Walmart.com."
+              title="Online Marketplace Commerce"
+              description="Products may be offered through major online marketplaces including Amazon and Walmart.com."
             />
             <CapabilityCard
-              title="Product merchandising"
-              description="Purchased products are presented through retail listings and category placement appropriate to each channel."
+              title="Consumer Product Categories"
+              description="Greatly Brands may source and distribute household, personal care, home, office, and general merchandise depending on demand and supplier agreements."
             />
             <CapabilityCard
-              title="Inventory purchasing"
-              description="Greatly Brands buys products for resale. Supplier conversations should assume wholesale purchasing, not consignment-only browsing."
+              title="Responsible Channel Expansion"
+              description="Additional retail channels may be added when supplier agreements, demand, and operational capacity support expansion."
             />
             <CapabilityCard
-              title="Category expansion"
-              description="New consumer categories may be added when product quality, demand, and economics support expansion."
-            />
-            <CapabilityCard
-              title="Supplier relationships"
+              title="Supplier Relationship Growth"
               description="Retail capacity is used to create durable purchasing relationships with manufacturers, distributors, and brand owners."
             />
           </div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
+import { PhoneLink } from "@/components/PhoneLink";
 import { primaryNav, supplierCta } from "@/lib/navigation";
 
 export function MobileNavigation() {
@@ -55,13 +56,18 @@ export function MobileNavigation() {
       </button>
 
       {open ? (
-        <div className="fixed inset-0 z-50 bg-navy/40" role="presentation">
+        <div
+          className="fixed inset-0 z-50 bg-navy/40"
+          role="presentation"
+          onClick={() => setOpen(false)}
+        >
           <div
             id={panelId}
             role="dialog"
             aria-modal="true"
             aria-label="Site menu"
             className="absolute inset-y-0 right-0 flex w-[min(100%,22rem)] flex-col bg-white shadow-xl"
+            onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-line px-5 py-4">
               <Logo />
@@ -98,6 +104,10 @@ export function MobileNavigation() {
               <Button href={supplierCta.href} className="w-full">
                 {supplierCta.label}
               </Button>
+              <p className="mt-3 text-center text-sm text-muted">
+                Call{" "}
+                <PhoneLink className="font-semibold text-navy hover:underline" />
+              </p>
             </div>
           </div>
         </div>

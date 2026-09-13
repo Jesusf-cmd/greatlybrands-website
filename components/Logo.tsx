@@ -35,7 +35,7 @@ function Mark({ variant }: { variant: "navy" | "white" }) {
 
 export function Logo({ variant = "navy", href = "/", className = "" }: LogoProps) {
   const word = variant === "white" ? "text-white" : "text-navy";
-  const sub = variant === "white" ? "text-blue-200" : "text-blue";
+  const sub = variant === "white" ? "text-blue-soft" : "text-blue";
 
   const inner = logo.useImageAsset ? (
     // Production logo drop-in. Keep width/height attributes to limit layout shift.

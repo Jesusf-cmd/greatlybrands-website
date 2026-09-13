@@ -4,7 +4,7 @@ import type { ProductCategory } from "@/lib/categories";
 
 export function CategoryCard({ category }: { category: ProductCategory }) {
   return (
-    <article className="group overflow-hidden rounded-md border border-line bg-white shadow-[0_8px_24px_rgba(12,30,56,0.06)]">
+    <article className="group overflow-hidden rounded-sm border border-line bg-white shadow-[0_8px_24px_rgba(12,30,56,0.06)]">
       <Link href={`/products#${category.slug}`} className="block">
         <div className="relative aspect-[4/3] overflow-hidden bg-paper">
           <Image

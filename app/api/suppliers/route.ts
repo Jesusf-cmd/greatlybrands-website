@@ -8,7 +8,7 @@ import {
   isValidWebsite,
   sanitizeText,
 } from "@/lib/validation";
-import { nationwideRightsOptions, supplierRelationships } from "@/lib/company";
+import { supplierCompanyTypes } from "@/lib/company";
 
 export async function POST(request: Request) {
   const ip = getClientIp(request.headers);
@@ -33,11 +33,11 @@ export async function POST(request: Request) {
     email: sanitizeText(body.email, 254).toLowerCase(),
     phone: sanitizeText(body.phone, 30),
     websiteUrl: sanitizeText(body.websiteUrl, 300),
+    companyType: sanitizeText(body.companyType, 80),
     categories: sanitizeText(body.categories, 120),
     brands: sanitizeText(body.brands, 400),
-    relationship: sanitizeText(body.relationship, 80),
     minimumOrder: sanitizeText(body.minimumOrder, 200),
-    nationwideRights: sanitizeText(body.nationwideRights, 40),
+    authorized: body.authorized === "yes" || body.authorized === true ? "yes" : "no",
     message: sanitizeText(body.message, 5000),
   };
 
@@ -53,17 +53,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "Enter a valid website." }, { status: 400 });
   }
 
-  if (!supplierRelationships.includes(payload.relationship as (typeof supplierRelationships)[number])) {
-    return NextResponse.json({ ok: false, error: "Select a valid supplier relationship." }, { status: 400 });
-  }
-
-  if (
-    payload.nationwideRights &&
-    !nationwideRightsOptions.includes(
-      payload.nationwideRights as (typeof nationwideRightsOptions)[number],
-    )
-  ) {
-    return NextResponse.json({ ok: false, error: "Select a valid distribution-rights option." }, { status: 400 });
+  if (!supplierCompanyTypes.includes(payload.companyType as (typeof supplierCompanyTypes)[number])) {
+    return NextResponse.json({ ok: false, error: "Select a valid company type." }, { status: 400 });
   }
 
   await storeInquiry("supplier", payload);

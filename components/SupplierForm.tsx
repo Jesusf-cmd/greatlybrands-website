@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { productCategories } from "@/lib/categories";
-import {
-  nationwideRightsOptions,
-  supplierRelationships,
-} from "@/lib/company";
+import { supplierCompanyTypes } from "@/lib/company";
 import { isValidEmail, isValidPhone, isValidWebsite, sanitizeText } from "@/lib/validation";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -17,12 +14,12 @@ const initial = {
   email: "",
   phone: "",
   websiteUrl: "",
+  companyType: "",
   categories: "",
   brands: "",
-  relationship: "",
   minimumOrder: "",
-  nationwideRights: "",
   message: "",
+  authorized: false,
   fax: "",
 };
 
@@ -35,7 +32,7 @@ export function SupplierForm() {
   function onStart() {
     if (started) return;
     setStarted(true);
-    trackEvent("form_start", { form: "supplier" });
+    trackEvent("supplier_form_start", { form: "supplier" });
   }
 
   function validate() {
@@ -47,7 +44,7 @@ export function SupplierForm() {
     if (values.websiteUrl && !isValidWebsite(values.websiteUrl)) {
       next.websiteUrl = "Enter a valid website.";
     }
-    if (!values.relationship) next.relationship = "Select the supplier relationship type.";
+    if (!values.companyType) next.companyType = "Select a company type.";
     if (!sanitizeText(values.message, 5000)) {
       next.message = "Tell us about the products you would like Greatly Brands to consider.";
     }
@@ -63,10 +60,12 @@ export function SupplierForm() {
       const response = await fetch("/api/suppliers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          authorized: values.authorized ? "yes" : "no",
+        }),
       });
       if (!response.ok) throw new Error("Request failed");
-      trackEvent("form_submit", { form: "supplier" });
       trackEvent("supplier_form_submit", { form: "supplier" });
       setStatus("success");
       setValues(initial);
@@ -77,59 +76,66 @@ export function SupplierForm() {
 
   if (status === "success") {
     return (
-      <p className="rounded-md border border-line bg-paper p-5 text-navy" role="status">
-        Thank you. Your supplier inquiry has been received. A Greatly Brands team
-        member will review the information and follow up if there is a potential fit.
+      <p className="rounded-sm border border-line bg-paper p-5 text-navy" role="status">
+        Thank you. Your supplier inquiry has been received for review.
       </p>
     );
   }
 
-  const fieldClass =
-    "w-full rounded-sm border border-line bg-white px-3 py-2.5";
+  const fieldClass = "w-full rounded-sm border border-line bg-white px-3 py-2.5";
 
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-5" onFocus={onStart}>
       <div className="grid gap-5 md:grid-cols-2">
         <div className="grid gap-2">
           <label htmlFor="supplier-company" className="text-sm font-medium text-navy">
-            Company name <span className="text-blue">*</span>
+            Company Name <span className="text-blue">*</span>
           </label>
           <input
             id="supplier-company"
             className={fieldClass}
+            required
+            aria-invalid={Boolean(errors.companyName)}
+            aria-describedby={errors.companyName ? "supplier-company-error" : undefined}
             value={values.companyName}
             onChange={(e) => setValues({ ...values, companyName: e.target.value })}
           />
-          {errors.companyName ? <p className="text-sm text-red-700">{errors.companyName}</p> : null}
+          {errors.companyName ? <p id="supplier-company-error" className="text-sm text-red-700" role="alert">{errors.companyName}</p> : null}
         </div>
         <div className="grid gap-2">
           <label htmlFor="supplier-contact" className="text-sm font-medium text-navy">
-            Contact name <span className="text-blue">*</span>
+            Contact Name <span className="text-blue">*</span>
           </label>
           <input
             id="supplier-contact"
             className={fieldClass}
             autoComplete="name"
+            required
+            aria-invalid={Boolean(errors.contactName)}
+            aria-describedby={errors.contactName ? "supplier-contact-error" : undefined}
             value={values.contactName}
             onChange={(e) => setValues({ ...values, contactName: e.target.value })}
           />
-          {errors.contactName ? <p className="text-sm text-red-700">{errors.contactName}</p> : null}
+          {errors.contactName ? <p id="supplier-contact-error" className="text-sm text-red-700" role="alert">{errors.contactName}</p> : null}
         </div>
       </div>
       <div className="grid gap-5 md:grid-cols-2">
         <div className="grid gap-2">
           <label htmlFor="supplier-email" className="text-sm font-medium text-navy">
-            Business email <span className="text-blue">*</span>
+            Business Email <span className="text-blue">*</span>
           </label>
           <input
             id="supplier-email"
             type="email"
             className={fieldClass}
             autoComplete="email"
+            required
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "supplier-email-error" : undefined}
             value={values.email}
             onChange={(e) => setValues({ ...values, email: e.target.value })}
           />
-          {errors.email ? <p className="text-sm text-red-700">{errors.email}</p> : null}
+          {errors.email ? <p id="supplier-email-error" className="text-sm text-red-700" role="alert">{errors.email}</p> : null}
         </div>
         <div className="grid gap-2">
           <label htmlFor="supplier-phone" className="text-sm font-medium text-navy">
@@ -140,81 +146,88 @@ export function SupplierForm() {
             type="tel"
             className={fieldClass}
             autoComplete="tel"
+            aria-invalid={Boolean(errors.phone)}
+            aria-describedby={errors.phone ? "supplier-phone-error" : undefined}
             value={values.phone}
             onChange={(e) => setValues({ ...values, phone: e.target.value })}
           />
-          {errors.phone ? <p className="text-sm text-red-700">{errors.phone}</p> : null}
+          {errors.phone ? <p id="supplier-phone-error" className="text-sm text-red-700" role="alert">{errors.phone}</p> : null}
         </div>
-      </div>
-      <div className="grid gap-2">
-        <label htmlFor="supplier-website" className="text-sm font-medium text-navy">
-          Website
-        </label>
-        <input
-          id="supplier-website"
-          className={fieldClass}
-          inputMode="url"
-          placeholder="https://"
-          value={values.websiteUrl}
-          onChange={(e) => setValues({ ...values, websiteUrl: e.target.value })}
-        />
-        {errors.websiteUrl ? <p className="text-sm text-red-700">{errors.websiteUrl}</p> : null}
       </div>
       <div className="grid gap-5 md:grid-cols-2">
         <div className="grid gap-2">
-          <label htmlFor="supplier-categories" className="text-sm font-medium text-navy">
-            Product categories
+          <label htmlFor="supplier-website" className="text-sm font-medium text-navy">
+            Website
           </label>
-          <select
-            id="supplier-categories"
+          <input
+            id="supplier-website"
             className={fieldClass}
-            value={values.categories}
-            onChange={(e) => setValues({ ...values, categories: e.target.value })}
-          >
-            <option value="">Select a primary category</option>
-            {productCategories.map((category) => (
-              <option key={category.slug} value={category.name}>
-                {category.name}
-              </option>
-            ))}
-            <option value="Multiple categories">Multiple categories</option>
-          </select>
+            inputMode="url"
+            placeholder="https://"
+            aria-invalid={Boolean(errors.websiteUrl)}
+            aria-describedby={errors.websiteUrl ? "supplier-website-error" : undefined}
+            value={values.websiteUrl}
+            onChange={(e) => setValues({ ...values, websiteUrl: e.target.value })}
+          />
+          {errors.websiteUrl ? <p id="supplier-website-error" className="text-sm text-red-700" role="alert">{errors.websiteUrl}</p> : null}
         </div>
         <div className="grid gap-2">
-          <label htmlFor="supplier-relationship" className="text-sm font-medium text-navy">
-            Distributor / manufacturer relationship <span className="text-blue">*</span>
+          <label htmlFor="supplier-type" className="text-sm font-medium text-navy">
+            Company Type <span className="text-blue">*</span>
           </label>
           <select
-            id="supplier-relationship"
+            id="supplier-type"
             className={fieldClass}
-            value={values.relationship}
-            onChange={(e) => setValues({ ...values, relationship: e.target.value })}
+            required
+            aria-invalid={Boolean(errors.companyType)}
+            aria-describedby={errors.companyType ? "supplier-type-error" : undefined}
+            value={values.companyType}
+            onChange={(e) => setValues({ ...values, companyType: e.target.value })}
           >
-            <option value="">Select a relationship</option>
-            {supplierRelationships.map((item) => (
+            <option value="">Select a company type</option>
+            {supplierCompanyTypes.map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>
             ))}
           </select>
-          {errors.relationship ? <p className="text-sm text-red-700">{errors.relationship}</p> : null}
+          {errors.companyType ? <p id="supplier-type-error" className="text-sm text-red-700" role="alert">{errors.companyType}</p> : null}
         </div>
       </div>
       <div className="grid gap-2">
-        <label htmlFor="supplier-brands" className="text-sm font-medium text-navy">
-          Brands represented
+        <label htmlFor="supplier-categories" className="text-sm font-medium text-navy">
+          Product Categories
         </label>
-        <input
-          id="supplier-brands"
+        <select
+          id="supplier-categories"
           className={fieldClass}
-          value={values.brands}
-          onChange={(e) => setValues({ ...values, brands: e.target.value })}
-        />
+          value={values.categories}
+          onChange={(e) => setValues({ ...values, categories: e.target.value })}
+        >
+          <option value="">Select a primary category</option>
+          {productCategories.map((category) => (
+            <option key={category.slug} value={category.name}>
+              {category.name}
+            </option>
+          ))}
+          <option value="Multiple categories">Multiple categories</option>
+        </select>
       </div>
       <div className="grid gap-5 md:grid-cols-2">
         <div className="grid gap-2">
+          <label htmlFor="supplier-brands" className="text-sm font-medium text-navy">
+            Brands Represented
+          </label>
+          <input
+            id="supplier-brands"
+            className={fieldClass}
+            value={values.brands}
+            onChange={(e) => setValues({ ...values, brands: e.target.value })}
+          />
+        </div>
+        <div className="grid gap-2">
           <label htmlFor="supplier-moq" className="text-sm font-medium text-navy">
-            Minimum order requirements
+            Minimum Order Requirements
           </label>
           <input
             id="supplier-moq"
@@ -223,48 +236,46 @@ export function SupplierForm() {
             onChange={(e) => setValues({ ...values, minimumOrder: e.target.value })}
           />
         </div>
-        <div className="grid gap-2">
-          <label htmlFor="supplier-rights" className="text-sm font-medium text-navy">
-            Nationwide distribution rights, if applicable
-          </label>
-          <select
-            id="supplier-rights"
-            className={fieldClass}
-            value={values.nationwideRights}
-            onChange={(e) => setValues({ ...values, nationwideRights: e.target.value })}
-          >
-            <option value="">Select an option</option>
-            {nationwideRightsOptions.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
       <div className="grid gap-2">
         <label htmlFor="supplier-message" className="text-sm font-medium text-navy">
           Message <span className="text-blue">*</span>
         </label>
-        <textarea
-          id="supplier-message"
-          rows={6}
-          className={fieldClass}
-          value={values.message}
-          onChange={(e) => setValues({ ...values, message: e.target.value })}
-        />
-        {errors.message ? <p className="text-sm text-red-700">{errors.message}</p> : null}
+          <textarea
+            id="supplier-message"
+            rows={6}
+            className={fieldClass}
+            required
+            aria-invalid={Boolean(errors.message)}
+            aria-describedby={errors.message ? "supplier-message-error" : undefined}
+            value={values.message}
+            onChange={(e) => setValues({ ...values, message: e.target.value })}
+          />
+          {errors.message ? <p id="supplier-message-error" className="text-sm text-red-700" role="alert">{errors.message}</p> : null}
       </div>
-      <p className="hidden" aria-hidden="true">
+      <div className="flex items-start gap-3">
+        <input
+          id="supplier-authorized"
+          type="checkbox"
+          className="mt-1 h-4 w-4 rounded-sm border-line"
+          checked={values.authorized}
+          onChange={(e) => setValues({ ...values, authorized: e.target.checked })}
+        />
+        <label htmlFor="supplier-authorized" className="text-sm text-muted">
+          I confirm that I am authorized to discuss the products or brands referenced in this inquiry.
+        </label>
+      </div>
+      <div className="hidden" aria-hidden="true">
         <label htmlFor="supplier-fax">Fax</label>
         <input
           id="supplier-fax"
+          hidden
           tabIndex={-1}
           autoComplete="off"
           value={values.fax}
           onChange={(e) => setValues({ ...values, fax: e.target.value })}
         />
-      </p>
+      </div>
       {status === "error" ? (
         <p className="text-sm text-red-700" role="alert">
           The form could not be submitted. Please try again or call 918-321-0104.
@@ -273,7 +284,7 @@ export function SupplierForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center rounded-sm bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-hover disabled:opacity-60"
+        className="inline-flex min-h-11 items-center justify-center rounded-sm bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-hover disabled:opacity-60"
       >
         {status === "submitting" ? "Sending..." : "Submit supplier inquiry"}
       </button>

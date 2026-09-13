@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
 import { MobileNavigation } from "@/components/MobileNavigation";
+import { PhoneLink } from "@/components/PhoneLink";
+import { company } from "@/lib/company";
 import { primaryNav, supplierCta } from "@/lib/navigation";
 
 export function Header() {
@@ -20,7 +22,13 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-5 xl:flex">
+          <PhoneLink className="text-sm font-semibold text-navy hover:text-blue">
+            {company.phoneDisplay}
+          </PhoneLink>
+          <Button href={supplierCta.href}>{supplierCta.label}</Button>
+        </div>
+        <div className="hidden lg:block xl:hidden">
           <Button href={supplierCta.href}>{supplierCta.label}</Button>
         </div>
         <MobileNavigation />
