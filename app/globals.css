@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #0c1e38;
+  --navy-deep: #071525;
+  --navy-mid: #16325c;
+  --blue: #1f5bd8;
+  --blue-bright: #2b6be4;
+  --blue-hover: #1648b0;
+  --blue-soft: #e8f1fc;
+  --ink: #1b2430;
+  --muted: #5c6b7a;
+  --line: #e2e8f0;
+  --paper: #f5f7fa;
+  --white: #ffffff;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-mid: var(--navy-mid);
+  --color-blue: var(--blue);
+  --color-blue-bright: var(--blue-bright);
+  --color-blue-hover: var(--blue-hover);
+  --color-blue-soft: var(--blue-soft);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-paper: var(--paper);
+  --color-white: var(--white);
+  --font-sans: var(--font-ibm);
+  --shadow-card: 0 8px 24px rgba(12, 30, 56, 0.06);
+  --shadow-header: 0 1px 0 rgba(12, 30, 56, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: var(--white);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-ibm), "IBM Plex Sans", Helvetica, Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+::selection {
+  background: #d6e4ff;
+  color: var(--navy);
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.container-site {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+@media (min-width: 1440px) {
+  .container-site {
+    width: min(100% - 4rem, 80rem);
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.prose-gb > p + p {
+  margin-top: 1rem;
+}
+
+.prose-gb a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-gb a:hover {
+  color: var(--blue-hover);
+}
+
+.prose-gb ul {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.prose-gb li + li {
+  margin-top: 0.45rem;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" role="img" aria-labelledby="gbLogoTitle">
+  <title id="gbLogoTitle">Greatly Brands</title>
+  <rect width="64" height="64" rx="8" fill="#0C1E38"/>
+  <path d="M47.5 21.2C43.2 15.2 37.4 12.2 31.8 12.2C20.8 12.2 12.8 20.8 12.8 32C12.8 43.2 20.8 51.8 31.8 51.8C40.6 51.8 47.4 46.1 49.6 38.2" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+  <rect x="30" y="28.4" width="20.5" height="7.2" rx="1.2" fill="#FFFFFF"/>
+  <rect x="43.4" y="28.4" width="7.1" height="16.4" rx="1.2" fill="#2B6BE4"/>
+  <text x="80" y="30" fill="#0C1E38" font-family="IBM Plex Sans, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="4.2">GREATLY</text>
+  <text x="80" y="50" fill="#2B6BE4" font-family="IBM Plex Sans, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="6.4">BRANDS</text>
+</svg>
