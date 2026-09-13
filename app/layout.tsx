@@ -64,8 +64,8 @@ export const metadata: Metadata = {
     description: pages.home.description,
   },
   icons: {
-    icon: [{ url: "/icon", type: "image/png" }],
-    apple: [{ url: "/apple-icon", type: "image/png" }],
+    icon: [{ url: "/logo/icon.png", type: "image/png" }],
+    apple: [{ url: "/logo/apple-icon.png", type: "image/png" }],
   },
 };
 

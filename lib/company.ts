@@ -61,13 +61,14 @@ export const governmentCredentials = {
 
 export const logo = {
   /**
-   * Set true and place a production SVG/PNG at `src` when a final logo file is available.
-   * The inline Logo component is used until then.
+   * Approved Precision G artwork with its original outlined wordmark.
+   * The dark variant preserves its colors on a white field.
    */
-  useImageAsset: false,
+  useImageAsset: true,
   src: "/logo/greatly-brands.svg",
-  width: 220,
-  height: 48,
+  darkSrc: "/logo/greatly-brands-dark.svg",
+  width: 1280,
+  height: 400,
 };
 
 export function formatAddress(variant: "full" | "stacked" | "footer" = "stacked") {

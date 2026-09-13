@@ -13,6 +13,7 @@ export function organizationSchema() {
     legalName: company.legalEntity,
     alternateName: [company.legalName, company.dba],
     url: SITE_URL,
+    logo: `${SITE_URL}/logo/greatly-brands.svg`,
     telephone: company.phoneE164,
     address: {
       "@type": "PostalAddress",
