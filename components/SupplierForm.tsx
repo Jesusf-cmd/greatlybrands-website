@@ -94,10 +94,13 @@ export function SupplierForm() {
           <input
             id="supplier-company"
             className={fieldClass}
+            required
+            aria-invalid={Boolean(errors.companyName)}
+            aria-describedby={errors.companyName ? "supplier-company-error" : undefined}
             value={values.companyName}
             onChange={(e) => setValues({ ...values, companyName: e.target.value })}
           />
-          {errors.companyName ? <p className="text-sm text-red-700" role="alert">{errors.companyName}</p> : null}
+          {errors.companyName ? <p id="supplier-company-error" className="text-sm text-red-700" role="alert">{errors.companyName}</p> : null}
         </div>
         <div className="grid gap-2">
           <label htmlFor="supplier-contact" className="text-sm font-medium text-navy">
@@ -107,10 +110,13 @@ export function SupplierForm() {
             id="supplier-contact"
             className={fieldClass}
             autoComplete="name"
+            required
+            aria-invalid={Boolean(errors.contactName)}
+            aria-describedby={errors.contactName ? "supplier-contact-error" : undefined}
             value={values.contactName}
             onChange={(e) => setValues({ ...values, contactName: e.target.value })}
           />
-          {errors.contactName ? <p className="text-sm text-red-700" role="alert">{errors.contactName}</p> : null}
+          {errors.contactName ? <p id="supplier-contact-error" className="text-sm text-red-700" role="alert">{errors.contactName}</p> : null}
         </div>
       </div>
       <div className="grid gap-5 md:grid-cols-2">
@@ -123,10 +129,13 @@ export function SupplierForm() {
             type="email"
             className={fieldClass}
             autoComplete="email"
+            required
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "supplier-email-error" : undefined}
             value={values.email}
             onChange={(e) => setValues({ ...values, email: e.target.value })}
           />
-          {errors.email ? <p className="text-sm text-red-700" role="alert">{errors.email}</p> : null}
+          {errors.email ? <p id="supplier-email-error" className="text-sm text-red-700" role="alert">{errors.email}</p> : null}
         </div>
         <div className="grid gap-2">
           <label htmlFor="supplier-phone" className="text-sm font-medium text-navy">
@@ -137,10 +146,12 @@ export function SupplierForm() {
             type="tel"
             className={fieldClass}
             autoComplete="tel"
+            aria-invalid={Boolean(errors.phone)}
+            aria-describedby={errors.phone ? "supplier-phone-error" : undefined}
             value={values.phone}
             onChange={(e) => setValues({ ...values, phone: e.target.value })}
           />
-          {errors.phone ? <p className="text-sm text-red-700" role="alert">{errors.phone}</p> : null}
+          {errors.phone ? <p id="supplier-phone-error" className="text-sm text-red-700" role="alert">{errors.phone}</p> : null}
         </div>
       </div>
       <div className="grid gap-5 md:grid-cols-2">
@@ -153,10 +164,12 @@ export function SupplierForm() {
             className={fieldClass}
             inputMode="url"
             placeholder="https://"
+            aria-invalid={Boolean(errors.websiteUrl)}
+            aria-describedby={errors.websiteUrl ? "supplier-website-error" : undefined}
             value={values.websiteUrl}
             onChange={(e) => setValues({ ...values, websiteUrl: e.target.value })}
           />
-          {errors.websiteUrl ? <p className="text-sm text-red-700" role="alert">{errors.websiteUrl}</p> : null}
+          {errors.websiteUrl ? <p id="supplier-website-error" className="text-sm text-red-700" role="alert">{errors.websiteUrl}</p> : null}
         </div>
         <div className="grid gap-2">
           <label htmlFor="supplier-type" className="text-sm font-medium text-navy">
@@ -165,6 +178,9 @@ export function SupplierForm() {
           <select
             id="supplier-type"
             className={fieldClass}
+            required
+            aria-invalid={Boolean(errors.companyType)}
+            aria-describedby={errors.companyType ? "supplier-type-error" : undefined}
             value={values.companyType}
             onChange={(e) => setValues({ ...values, companyType: e.target.value })}
           >
@@ -175,7 +191,7 @@ export function SupplierForm() {
               </option>
             ))}
           </select>
-          {errors.companyType ? <p className="text-sm text-red-700" role="alert">{errors.companyType}</p> : null}
+          {errors.companyType ? <p id="supplier-type-error" className="text-sm text-red-700" role="alert">{errors.companyType}</p> : null}
         </div>
       </div>
       <div className="grid gap-2">
@@ -225,14 +241,17 @@ export function SupplierForm() {
         <label htmlFor="supplier-message" className="text-sm font-medium text-navy">
           Message <span className="text-blue">*</span>
         </label>
-        <textarea
-          id="supplier-message"
-          rows={6}
-          className={fieldClass}
-          value={values.message}
-          onChange={(e) => setValues({ ...values, message: e.target.value })}
-        />
-        {errors.message ? <p className="text-sm text-red-700" role="alert">{errors.message}</p> : null}
+          <textarea
+            id="supplier-message"
+            rows={6}
+            className={fieldClass}
+            required
+            aria-invalid={Boolean(errors.message)}
+            aria-describedby={errors.message ? "supplier-message-error" : undefined}
+            value={values.message}
+            onChange={(e) => setValues({ ...values, message: e.target.value })}
+          />
+          {errors.message ? <p id="supplier-message-error" className="text-sm text-red-700" role="alert">{errors.message}</p> : null}
       </div>
       <div className="flex items-start gap-3">
         <input
@@ -246,16 +265,17 @@ export function SupplierForm() {
           I confirm that I am authorized to discuss the products or brands referenced in this inquiry.
         </label>
       </div>
-      <p className="sr-only" aria-hidden="true">
+      <div className="hidden" aria-hidden="true">
         <label htmlFor="supplier-fax">Fax</label>
         <input
           id="supplier-fax"
+          hidden
           tabIndex={-1}
           autoComplete="off"
           value={values.fax}
           onChange={(e) => setValues({ ...values, fax: e.target.value })}
         />
-      </p>
+      </div>
       {status === "error" ? (
         <p className="text-sm text-red-700" role="alert">
           The form could not be submitted. Please try again or call 918-321-0104.

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { cloneElement, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { contactReasons } from "@/lib/company";
 import { isValidEmail, isValidPhone, sanitizeText } from "@/lib/validation";
@@ -153,17 +153,18 @@ export function ContactForm({
           onChange={(e) => setValues({ ...values, message: e.target.value })}
         />
       </Field>
-      <p className="sr-only" aria-hidden="true">
+      <div className="hidden" aria-hidden="true">
         <label htmlFor="contact-website">Website</label>
         <input
           id="contact-website"
           name="website"
+          hidden
           tabIndex={-1}
           autoComplete="off"
           value={values.website}
           onChange={(e) => setValues({ ...values, website: e.target.value })}
         />
-      </p>
+      </div>
       {status === "error" ? (
         <p className="text-sm text-red-700" role="alert">
           The form could not be submitted. Please try again or call 918-321-0104.
@@ -187,7 +188,13 @@ function Field({
   required,
 }: {
   label: string;
-  children: React.ReactElement<{ id?: string; className?: string; required?: boolean; "aria-invalid"?: boolean }>;
+  children: React.ReactElement<{
+    id?: string;
+    className?: string;
+    required?: boolean;
+    "aria-invalid"?: boolean;
+    "aria-describedby"?: string;
+  }>;
   error?: string;
   required?: boolean;
 }) {
@@ -198,11 +205,13 @@ function Field({
         {label}
         {required ? <span className="text-blue"> *</span> : null}
       </label>
-      {children && (
-        <div className="[&_input]:w-full [&_select]:w-full [&_textarea]:w-full [&_input]:rounded-sm [&_select]:rounded-sm [&_textarea]:rounded-sm [&_input]:border [&_select]:border [&_textarea]:border [&_input]:border-line [&_select]:border-line [&_textarea]:border-line [&_input]:bg-white [&_select]:bg-white [&_textarea]:bg-white [&_input]:px-3 [&_select]:px-3 [&_textarea]:px-3 [&_input]:py-2.5 [&_select]:py-2.5 [&_textarea]:py-2.5">
-          {children}
-        </div>
-      )}
+      <div className="[&_input]:w-full [&_select]:w-full [&_textarea]:w-full [&_input]:rounded-sm [&_select]:rounded-sm [&_textarea]:rounded-sm [&_input]:border [&_select]:border [&_textarea]:border [&_input]:border-line [&_select]:border-line [&_textarea]:border-line [&_input]:bg-white [&_select]:bg-white [&_textarea]:bg-white [&_input]:px-3 [&_select]:px-3 [&_textarea]:px-3 [&_input]:py-2.5 [&_select]:py-2.5 [&_textarea]:py-2.5">
+        {cloneElement(children, {
+          required,
+          "aria-invalid": Boolean(error),
+          "aria-describedby": error ? `${id}-error` : undefined,
+        })}
+      </div>
       {error ? (
         <p id={`${id}-error`} className="text-sm text-red-700" role="alert">
           {error}
