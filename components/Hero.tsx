@@ -1,26 +1,17 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowIcon, Button } from "@/components/Button";
 import { company } from "@/lib/company";
 import { purchasingCta, supplierCta } from "@/lib/navigation";
 
 const facts = [
-  { value: "9", label: "Product categories" },
-  { value: "U.S.", label: "Nationwide availability" },
-  { value: "Amazon", label: "Named marketplace" },
-  { value: "Walmart.com", label: "Named marketplace" },
+  { value: "9", label: "Consumer product categories" },
+  { value: "U.S.", label: "Nationwide service area" },
+  { value: "Retail", label: "Online marketplace channels" },
+  { value: "Public sector", label: "Purchasing inquiries" },
 ];
 
 export function Hero() {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const id = window.setTimeout(() => setLoaded(true), 100);
-    return () => window.clearTimeout(id);
-  }, []);
-
   return (
     <section className="relative flex min-h-screen flex-col justify-end overflow-hidden bg-navy-hero">
       <div className="absolute inset-0">
@@ -57,16 +48,9 @@ export function Hero() {
         </svg>
       </div>
 
-      <div className="relative z-10 container-site w-full pt-36 pb-20">
+      <div className="relative z-10 container-site w-full pt-32 pb-14">
         <div className="max-w-4xl">
-          <div
-            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-indigo-light/25 bg-indigo-light/12 px-4 py-2 text-xs font-semibold tracking-widest text-indigo-soft uppercase"
-            style={{
-              opacity: loaded ? 1 : 0,
-              transform: loaded ? "translateY(0)" : "translateY(16px)",
-              transition: "opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s",
-            }}
-          >
+          <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-indigo-light/25 bg-indigo-light/12 px-4 py-2 text-xs font-semibold tracking-widest text-indigo-soft uppercase">
             <span className="h-1.5 w-1.5 rounded-full bg-current" />
             U.S.-Based Retail & Procurement Partner
           </div>
@@ -76,9 +60,6 @@ export function Hero() {
             style={{
               fontSize: "clamp(3.2rem, 8vw, 6.5rem)",
               letterSpacing: "-0.025em",
-              opacity: loaded ? 1 : 0,
-              transform: loaded ? "translateY(0)" : "translateY(24px)",
-              transition: "opacity 0.9s ease 0.25s, transform 0.9s ease 0.25s",
             }}
           >
             From sourcing
@@ -88,26 +69,14 @@ export function Hero() {
             nationwide.
           </h1>
 
-          <p
-            className="mb-10 max-w-[44ch] text-lg leading-relaxed text-white/50"
-            style={{
-              opacity: loaded ? 1 : 0,
-              transform: loaded ? "translateY(0)" : "translateY(20px)",
-              transition: "opacity 0.9s ease 0.4s, transform 0.9s ease 0.4s",
-            }}
-          >
-            {company.name} works with manufacturers, brands, and distributors interested in
-            U.S. retail and purchasing relationships.
+          <p className="mb-8 max-w-[46ch] text-lg leading-relaxed text-white/75">
+            {company.name} is a U.S.-based retail and procurement company. We work with
+            manufacturers, brand owners, distributors, and wholesalers to purchase consumer
+            products for resale and for commercial and government purchasing. Service area is
+            the United States.
           </p>
 
-          <div
-            className="flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap"
-            style={{
-              opacity: loaded ? 1 : 0,
-              transform: loaded ? "translateY(0)" : "translateY(16px)",
-              transition: "opacity 0.9s ease 0.55s, transform 0.9s ease 0.55s",
-            }}
-          >
+          <div className="flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <Button href={supplierCta.href} variant="pill" className="group w-full px-7 py-4 sm:w-auto">
               Become a Supplier
               <ArrowIcon />
@@ -115,15 +84,27 @@ export function Hero() {
             <Button href={purchasingCta.href} variant="onDarkSecondary" className="w-full px-7 py-4 sm:w-auto">
               Discuss Purchasing Needs
             </Button>
+            <Link
+              href="/about"
+              className="text-sm font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+            >
+              About Greatly Brands
+            </Link>
           </div>
         </div>
 
-        <HeroFacts loaded={loaded} />
+        <div className="mt-12 grid grid-cols-2 gap-y-6 border-t border-white/8 pt-8 md:grid-cols-4">
+          {facts.map((fact) => (
+            <div key={`${fact.value}-${fact.label}`}>
+              <div className="font-display mb-1 text-2xl leading-none font-semibold text-white">
+                {fact.value}
+              </div>
+              <div className="pr-3 text-xs tracking-wide text-white/60">{fact.label}</div>
+            </div>
+          ))}
+        </div>
 
-        <div
-          className="mt-10 hidden flex-col items-center gap-2 md:flex"
-          style={{ opacity: loaded ? 0.4 : 0, transition: "opacity 1s ease 1.2s" }}
-        >
+        <div className="mt-10 hidden flex-col items-center gap-2 opacity-40 md:flex">
           <span className="text-xs font-medium tracking-widest text-white uppercase">Scroll</span>
           <div className="relative h-8 w-px overflow-hidden bg-white/15">
             <div className="animate-scroll-cue absolute inset-x-0 top-0 h-4 bg-white" />
@@ -131,26 +112,5 @@ export function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-function HeroFacts({ loaded }: { loaded: boolean }) {
-  return (
-    <div
-      className="mt-20 grid grid-cols-2 gap-y-6 border-t border-white/8 pt-8 md:grid-cols-4"
-      style={{
-        opacity: loaded ? 1 : 0,
-        transition: "opacity 0.9s ease 0.7s",
-      }}
-    >
-      {facts.map((fact) => (
-        <div key={`${fact.value}-${fact.label}`}>
-          <div className="font-display mb-1 text-2xl leading-none font-semibold text-white">
-            {fact.value}
-          </div>
-          <div className="text-xs tracking-wide text-white/35">{fact.label}</div>
-        </div>
-      ))}
-    </div>
   );
 }

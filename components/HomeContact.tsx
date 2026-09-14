@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { FadeIn } from "@/components/FadeIn";
 import { PhoneLink } from "@/components/PhoneLink";
@@ -23,9 +24,17 @@ export function HomeContact() {
           <h2 className="font-display mb-4 text-[clamp(2rem,3.5vw,2.8rem)] leading-tight text-navy">
             Let&apos;s talk about what you need.
           </h2>
-          <p className="mx-auto max-w-[44ch] text-sm leading-relaxed text-muted-soft">
+          <p className="mx-auto max-w-[48ch] text-sm leading-relaxed text-muted">
             Whether you are a supplier exploring a relationship or a buyer with procurement
-            needs, use the existing inquiry forms below.
+            needs, use the inquiry forms below or continue to the dedicated{" "}
+            <Link href="/suppliers" className="font-semibold text-indigo underline-offset-4 hover:underline">
+              supplier
+            </Link>{" "}
+            and{" "}
+            <Link href="/contact" className="font-semibold text-indigo underline-offset-4 hover:underline">
+              contact
+            </Link>{" "}
+            pages.
           </p>
         </FadeIn>
 

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FadeIn } from "@/components/FadeIn";
 import { SectionLabel } from "@/components/SectionLabel";
 import { company } from "@/lib/company";
@@ -6,11 +7,11 @@ const pillars = [
   {
     icon: "🏠",
     title: "U.S. Service Area",
-    body: "Service area is the United States.",
+    body: "We work with suppliers and purchasing organizations throughout the United States.",
   },
   {
     icon: "🛒",
-    title: "Named Retail Channels",
+    title: "Online Retail Channels",
     body: "Products may be offered through established U.S. online retail channels, including Amazon and Walmart.com.",
   },
   {
@@ -20,7 +21,7 @@ const pillars = [
   },
   {
     icon: "🏛",
-    title: "Gov & Commercial",
+    title: "Commercial & Government",
     body: "Prepared to evaluate eligible commercial and public-sector purchasing needs.",
   },
 ];
@@ -35,15 +36,22 @@ export function HomeAbout() {
             <h2 className="font-display mb-6 text-[clamp(2rem,3.5vw,2.8rem)] leading-tight text-navy">
               A procurement company built for lasting relationships.
             </h2>
-            <p className="mb-5 max-w-[42ch] text-[1.05rem] leading-relaxed text-muted">
+            <p className="mb-5 max-w-[46ch] text-[1.05rem] leading-relaxed text-muted">
               {company.name} is a U.S.-based retail and procurement company. We work with
-              manufacturers, brand owners, distributors, and wholesalers interested in retail
-              and purchasing relationships in the United States.
+              manufacturers, brand owners, distributors, and wholesalers to purchase consumer
+              products for resale and for commercial and government purchasing organizations.
             </p>
-            <p className="max-w-[40ch] leading-relaxed text-muted-soft">
-              We evaluate partners carefully — prioritizing repeat purchasing potential, broad
-              category fit, and a shared interest in sustainable volume over time.
+            <p className="mb-5 max-w-[44ch] leading-relaxed text-muted-soft">
+              We evaluate partners carefully — prioritizing category fit, clear purchasing
+              communication, repeat purchasing potential, and a shared interest in sustainable
+              volume over time.
             </p>
+            <Link
+              href="/about"
+              className="text-sm font-semibold text-indigo underline-offset-4 hover:underline"
+            >
+              Read more about Greatly Brands
+            </Link>
             <div className="mt-10 flex gap-8">
               <div>
                 <div className="text-sm font-semibold text-navy">
@@ -70,7 +78,7 @@ export function HomeAbout() {
                     {pillar.icon}
                   </div>
                   <h3 className="mb-2 text-sm font-semibold text-navy">{pillar.title}</h3>
-                  <p className="text-xs leading-relaxed text-warm-muted">{pillar.body}</p>
+                  <p className="text-xs leading-relaxed text-muted">{pillar.body}</p>
                 </div>
               </FadeIn>
             ))}

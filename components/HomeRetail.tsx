@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/Button";
 import { FadeIn } from "@/components/FadeIn";
 import { SectionLabel } from "@/components/SectionLabel";
 import { marketplaceChannels } from "@/lib/company";
@@ -24,44 +26,41 @@ export function HomeRetail() {
                 }}
               />
             </div>
-            <div className="absolute right-3 bottom-3 rounded-2xl border border-[#eae8e3] bg-white px-5 py-4 shadow-xl md:right-[-12px] md:bottom-[-20px]">
-              <div className="mb-1 text-xs font-semibold text-warm-muted">Named channels</div>
-              <div className="flex items-center gap-2">
-                {marketplaceChannels.map((channel, index) => (
-                  <span key={channel} className="flex items-center gap-2">
-                    {index > 0 ? <span className="text-xs text-[#d0cde6]">·</span> : null}
-                    <span className="text-sm font-bold text-navy">{channel}</span>
-                  </span>
-                ))}
-              </div>
-            </div>
           </FadeIn>
 
           <FadeIn delay={150}>
             <SectionLabel>Retail Distribution</SectionLabel>
             <h2 className="font-display mb-6 text-[clamp(2rem,3.5vw,2.8rem)] leading-tight text-navy">
-              Established channels, identified by name.
+              Nationwide online retail channels.
             </h2>
-            <p className="mb-8 max-w-[40ch] text-[1.05rem] leading-relaxed text-muted">
+            <p className="mb-5 max-w-[46ch] text-[1.05rem] leading-relaxed text-muted">
               Greatly Brands may offer products through established U.S. online retail
-              channels, including Amazon and Walmart.com.
+              channels, including {marketplaceChannels.join(" and ")}. Those names identify
+              sales channels. They do not mean Greatly Brands is owned by, endorsed by,
+              affiliated with, or officially partnered with those companies.
             </p>
-            <div className="mb-8 grid grid-cols-2 gap-3">
-              {marketplaceChannels.map((channel) => (
-                <div
-                  key={channel}
-                  className="rounded-xl border border-[#e2e0da] bg-paper px-5 py-4 text-center"
-                >
-                  <div className="mb-0.5 text-sm font-semibold text-navy">{channel}</div>
-                  <div className="text-xs text-warm-muted">Name used for identification</div>
-                </div>
-              ))}
-            </div>
-            <p className="max-w-[40ch] text-xs leading-relaxed text-[#b0aa9f]">
+            <p className="mb-8 max-w-[44ch] leading-relaxed text-muted">
+              Suitable consumer products may be made available to customers and purchasing
+              organizations throughout the United States, depending on supplier agreements,
+              category demand, and channel fit.
+            </p>
+            <p className="mb-8 max-w-[44ch] text-xs leading-relaxed text-[#7a746a]">
               Amazon and Walmart.com are trademarks of their respective owners. References are
               for identification purposes only and do not imply endorsement, affiliation, or
               active seller status.
             </p>
+            <div className="flex flex-wrap gap-3">
+              <Button href="/retail">Retail capabilities</Button>
+              <Button href="/contact" variant="secondary">
+                Contact Greatly Brands
+              </Button>
+            </div>
+            <Link
+              href="/products"
+              className="mt-5 inline-flex text-sm font-semibold text-indigo underline-offset-4 hover:underline"
+            >
+              Browse product categories
+            </Link>
           </FadeIn>
         </div>
       </div>
