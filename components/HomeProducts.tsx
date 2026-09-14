@@ -63,7 +63,7 @@ export function HomeProducts() {
                       "linear-gradient(180deg, rgba(9,15,30,0.12) 20%, rgba(9,15,30,0.78) 78%, rgba(9,15,30,0.92) 100%)",
                   }}
                 />
-                <div className="relative z-10 p-5 pb-8 sm:p-6">
+                <div className="relative z-10 p-5 pr-16 pb-10 sm:p-6 sm:pr-6 sm:pb-6">
                   <h3 className="text-base font-semibold text-white sm:text-lg">{category.name}</h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-white/90">{category.summary}</p>
                   <span className="mt-3 inline-block text-xs font-semibold tracking-wide text-indigo-soft">

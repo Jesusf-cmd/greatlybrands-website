@@ -39,10 +39,10 @@ export const pages = {
   },
   retail: {
     path: "/retail",
-    title: "Nationwide Multi-Channel Retail | Greatly Brands",
+    title: "Nationwide Online Retail | Greatly Brands",
     description:
-      "Greatly Brands participates in online marketplace retail channels, including Amazon and Walmart.com, to reach consumers nationwide through multi-channel distribution.",
-    h1: "Nationwide Multi-Channel Retail",
+      "Greatly Brands may offer products through established U.S. online retail channels, including Amazon and Walmart.com. Service area is the United States.",
+    h1: "Nationwide Online Retail",
   },
   government: {
     path: "/government",

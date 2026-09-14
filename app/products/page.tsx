@@ -46,7 +46,7 @@ export default function ProductsPage() {
           </p>
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {productCategories.map((category) => (
-              <div key={category.slug} id={category.slug} className="scroll-mt-36">
+              <div key={category.slug} id={category.slug} className="scroll-mt-24">
                 <CategoryCard category={category} />
               </div>
             ))}

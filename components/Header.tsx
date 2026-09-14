@@ -25,7 +25,7 @@ export function Header() {
     <header
       className="fixed inset-x-0 top-0.5 z-50 transition-all duration-500"
       style={{
-        background: scrolled ? "rgba(10,19,38,0.92)" : "transparent",
+        background: scrolled ? "rgba(8,14,28,0.98)" : "transparent",
         backdropFilter: scrolled ? "blur(20px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
       }}

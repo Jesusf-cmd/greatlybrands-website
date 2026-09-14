@@ -55,6 +55,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  /* Keep hash targets below the fixed header on mobile and desktop. */
+  scroll-padding-top: 6rem;
 }
 
 html,

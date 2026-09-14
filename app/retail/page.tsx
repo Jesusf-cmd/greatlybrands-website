@@ -29,7 +29,7 @@ export default function RetailPage() {
       <PageHero
         eyebrow="Retail"
         title={pages.retail.h1}
-        description="Greatly Brands participates in online retail channels that can make suitable consumer products available to customers throughout the United States."
+        description="Greatly Brands may offer products through established U.S. online retail channels, including Amazon and Walmart.com. Those names identify sales channels for customers and purchasing organizations throughout the United States."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Retail" },
