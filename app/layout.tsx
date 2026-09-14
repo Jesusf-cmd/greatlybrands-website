@@ -1,4 +1,4 @@
-import { IBM_Plex_Sans } from "next/font/google";
+import { DM_Serif_Display, Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { SiteShell } from "@/components/SiteShell";
 import { JsonLd } from "@/components/JsonLd";
@@ -7,11 +7,18 @@ import { company, SITE_URL } from "@/lib/company";
 import { pages } from "@/lib/pages";
 import "./globals.css";
 
-const ibmPlexSans = IBM_Plex_Sans({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-ibm",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+});
+
+const dmSerif = DM_Serif_Display({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-dm-serif",
 });
 
 export const metadata: Metadata = {
@@ -23,18 +30,16 @@ export const metadata: Metadata = {
   description: pages.home.description,
   applicationName: company.name,
   keywords: [
-    "nationwide retailer",
-    "consumer goods retailer",
+    "U.S. retail and procurement",
     "consumer product buyer",
     "wholesale product buyer",
     "brand retail partner",
     "supplier partnerships",
-    "multi-channel retailer",
-    "marketplace retailer",
+    "online retail channels",
     "consumer goods procurement",
-    "general merchandise supplier",
-    "government product supplier",
-    "federal product supplier",
+    "general merchandise",
+    "government purchasing inquiries",
+    "public-sector procurement",
     "Tulsa procurement company",
     "Tulsa retail company",
   ],
@@ -71,8 +76,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${ibmPlexSans.variable} h-full`}>
-      <body className={`${ibmPlexSans.className} min-h-full flex flex-col antialiased`}>
+    <html lang="en" className={`${inter.variable} ${dmSerif.variable} h-full`}>
+      <body className={`${inter.className} flex min-h-full flex-col antialiased`}>
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <SiteShell>{children}</SiteShell>
       </body>

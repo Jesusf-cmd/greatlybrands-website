@@ -13,7 +13,7 @@ export const pages = {
     path: "/",
     title: "Nationwide Retail & Procurement Partner | Greatly Brands",
     description:
-      "Greatly Brands is a U.S. multi-channel retailer and procurement company purchasing consumer products from brands, manufacturers, and distributors for nationwide resale.",
+      "Greatly Brands is a U.S.-based retail and procurement company. We work with manufacturers, brand owners, distributors, and wholesalers to purchase consumer products for resale and for commercial and government purchasing. Service area is the United States.",
     h1: "Nationwide Retail & Procurement Partner",
   },
   about: {
@@ -39,10 +39,10 @@ export const pages = {
   },
   retail: {
     path: "/retail",
-    title: "Nationwide Multi-Channel Retail | Greatly Brands",
+    title: "Nationwide Online Retail | Greatly Brands",
     description:
-      "Greatly Brands participates in online marketplace retail channels, including Amazon and Walmart.com, to reach consumers nationwide through multi-channel distribution.",
-    h1: "Nationwide Multi-Channel Retail",
+      "Greatly Brands may offer products through established U.S. online retail channels, including Amazon and Walmart.com. Service area is the United States.",
+    h1: "Nationwide Online Retail",
   },
   government: {
     path: "/government",

@@ -79,8 +79,12 @@ export function ContactForm({
 
   if (status === "success") {
     return (
-      <p className="rounded-sm border border-line bg-paper p-5 text-navy" role="status">
-        Thank you. Your inquiry has been received.
+      <p className="rounded-2xl border border-line bg-cream p-8 text-center" role="status">
+        <span className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-soft text-indigo">
+          ✓
+        </span>
+        <span className="font-display mt-3 block text-lg text-navy">Thank you.</span>
+        Your inquiry has been received.
       </p>
     );
   }
@@ -173,7 +177,7 @@ export function ContactForm({
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex min-h-11 items-center justify-center rounded-sm bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-hover disabled:opacity-60"
+        className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-linear-to-br from-indigo to-blue px-5 py-3.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60"
       >
         {status === "submitting" ? "Sending..." : submitLabel}
       </button>
@@ -205,8 +209,9 @@ function Field({
         {label}
         {required ? <span className="text-blue"> *</span> : null}
       </label>
-      <div className="[&_input]:w-full [&_select]:w-full [&_textarea]:w-full [&_input]:rounded-sm [&_select]:rounded-sm [&_textarea]:rounded-sm [&_input]:border [&_select]:border [&_textarea]:border [&_input]:border-line [&_select]:border-line [&_textarea]:border-line [&_input]:bg-white [&_select]:bg-white [&_textarea]:bg-white [&_input]:px-3 [&_select]:px-3 [&_textarea]:px-3 [&_input]:py-2.5 [&_select]:py-2.5 [&_textarea]:py-2.5">
+      <div>
         {cloneElement(children, {
+          className: `field-input ${children.props.className ?? ""}`,
           required,
           "aria-invalid": Boolean(error),
           "aria-describedby": error ? `${id}-error` : undefined,

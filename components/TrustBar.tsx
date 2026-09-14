@@ -1,35 +1,27 @@
 const items = [
-  {
-    title: "Nationwide Reach",
-    copy: "Consumer products sourced for customers throughout the United States.",
-  },
-  {
-    title: "Multi-Channel Retail",
-    copy: "Products may be offered through established U.S. online retail channels.",
-  },
-  {
-    title: "Broad Product Categories",
-    copy: "Purchasing across household, personal care, and general merchandise.",
-  },
-  {
-    title: "Commercial & Government",
-    copy: "Prepared to evaluate eligible commercial and public-sector purchasing needs.",
-  },
+  { text: "Greatly LLC DBA Greatly Brands" },
+  { text: "U.S. nationwide service area" },
+  { text: "Nine consumer product categories" },
+  { text: "918-321-0104" },
+  { text: "Repeat purchasing focus" },
 ];
 
 export function TrustBar() {
   return (
-    <section className="border-y border-line bg-white" aria-label="Capabilities">
-      <div className="container-site grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((item) => (
-          <div key={item.title} className="lg:border-l lg:border-line lg:pl-8 first:lg:border-l-0 first:lg:pl-0">
-            <p className="text-sm font-semibold tracking-wide text-navy uppercase">
-              {item.title}
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-muted">{item.copy}</p>
-          </div>
-        ))}
+    <div className="border-y border-[#e2e0da] bg-[#f0efeb] py-8" aria-label="Company overview">
+      <div className="container-site">
+        <div className="flex flex-wrap justify-center gap-x-10 gap-y-3">
+          {items.map((item) => (
+            <div key={item.text} className="flex items-center gap-2 text-xs font-medium">
+              <span
+                className="h-1.5 w-1.5 shrink-0 rounded-full bg-indigo"
+                aria-hidden="true"
+              />
+              <span className="text-navy">{item.text}</span>
+            </div>
+          ))}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

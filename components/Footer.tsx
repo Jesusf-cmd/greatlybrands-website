@@ -1,53 +1,76 @@
+import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
 import { PhoneLink } from "@/components/PhoneLink";
 import { company, formatAddress } from "@/lib/company";
-import { footerNav } from "@/lib/navigation";
+import { footerColumns, purchasingCta, supplierCta } from "@/lib/navigation";
 import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-navy text-white">
-      <div className="container-site grid gap-12 py-16 md:grid-cols-12">
-        <div className="md:col-span-5">
-          <Logo variant="white" />
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/75">
-            {company.legalName}. Serving customers and business partners throughout
-            the United States.
-          </p>
-        </div>
-        <div className="md:col-span-3">
-          <h2 className="text-xs font-semibold tracking-[0.18em] text-white/60 uppercase">
-            Company
-          </h2>
-          <ul className="mt-4 space-y-2 text-sm">
-            {footerNav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="text-white/80 hover:text-white">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="md:col-span-4">
-          <h2 className="text-xs font-semibold tracking-[0.18em] text-white/60 uppercase">
-            Contact
-          </h2>
-          <address className="mt-4 space-y-2 text-sm not-italic text-white/80">
-            <p>{company.legalName}</p>
-            <p className="whitespace-pre-line">{formatAddress("footer")}</p>
-            <p>
-              Phone: <PhoneLink className="text-white hover:underline" />
+    <footer className="bg-navy-deep text-white">
+      <div className="border-b border-white/6">
+        <div className="container-site flex flex-col items-start justify-between gap-8 py-14 md:flex-row md:items-center">
+          <div>
+            <h2 className="font-display text-xl font-semibold text-white">Ready to work together?</h2>
+            <p className="mt-1 text-sm text-white/40">
+              Whether you supply products or need to procure them, start with an inquiry.
             </p>
-          </address>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button href={supplierCta.href} variant="pillOutline" className="min-h-10 px-5 py-2.5 text-sm">
+              {supplierCta.label}
+            </Button>
+            <Button href={purchasingCta.href} variant="pill" className="min-h-10 px-5 py-2.5 text-sm">
+              Discuss Purchasing
+            </Button>
+          </div>
         </div>
       </div>
-      <div className="border-t border-white/10">
-        <div className="container-site flex flex-col gap-2 py-5 text-xs text-white/55 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {new Date().getFullYear()} {company.legalName}. All rights reserved.
+
+      <div className="container-site pt-14 pb-10">
+        <div className="mb-12 grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+          <div>
+            <Logo variant="white" />
+            <p className="mt-5 max-w-[28ch] text-xs leading-relaxed text-white/35">
+              {company.legalName}. A U.S.-based retail and procurement company serving a
+              nationwide United States service area.
+            </p>
+            <PhoneLink className="mt-6 inline-flex items-center gap-2 text-xs font-medium text-white/40 hover:text-white">
+              <svg width="13" height="13" fill="none" viewBox="0 0 16 16" aria-hidden="true">
+                <path
+                  d="M2 3a1 1 0 011-1h2l1 2.5-1.5 1.5A10 10 0 009 9.5L10.5 8 13 9v2a1 1 0 01-1 1C5 12 2 7 2 3"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                />
+              </svg>
+              {company.phoneDisplay}
+            </PhoneLink>
+          </div>
+
+          {Object.entries(footerColumns).map(([section, items]) => (
+            <div key={section}>
+              <h2 className="mb-5 text-xs font-semibold tracking-widest text-white/30 uppercase">
+                {section}
+              </h2>
+              <ul className="space-y-3">
+                {items.map((item) => (
+                  <li key={`${item.href}-${item.label}`}>
+                    <Link href={item.href} className="text-xs text-white/45 transition-colors hover:text-white">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col items-start justify-between gap-3 border-t border-white/6 pt-8 md:flex-row md:items-center">
+          <p className="text-xs text-white/22">
+            © {new Date().getFullYear()} {company.legalName} · {formatAddress("full")}
           </p>
-          <p>GreatlyBrands.com</p>
+          <p className="text-xs text-white/22">{company.domain}</p>
         </div>
       </div>
     </footer>

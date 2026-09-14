@@ -3,7 +3,9 @@ export type ProductCategory = {
   name: string;
   summary: string;
   image: string;
+  gridImage: string;
   imageAlt: string;
+  wide?: boolean;
 };
 
 export const productCategories: ProductCategory[] = [
@@ -13,6 +15,8 @@ export const productCategories: ProductCategory[] = [
     summary:
       "Paper goods, cleaning supplies, household consumables, and everyday essentials.",
     image: "/images/category-household.webp",
+    gridImage: "/images/redesign/category-household.jpg",
+    wide: true,
     imageAlt:
       "Cleaning and household supply bottles arranged on a counter, representing everyday household essentials.",
   },
@@ -22,6 +26,7 @@ export const productCategories: ProductCategory[] = [
     summary:
       "Personal-care products, hygiene products, wellness-related consumer goods, and daily necessities.",
     image: "/images/category-health.webp",
+    gridImage: "/images/redesign/category-health.jpg",
     imageAlt:
       "Personal-care bottles and toiletries on a bathroom shelf, representing health and hygiene merchandise.",
   },
@@ -30,6 +35,7 @@ export const productCategories: ProductCategory[] = [
     name: "Beauty & Grooming",
     summary: "Beauty, skincare, grooming, and personal-care merchandise.",
     image: "/images/category-beauty.webp",
+    gridImage: "/images/redesign/category-beauty.jpg",
     imageAlt:
       "Makeup brushes and beauty tools on a neutral surface, representing beauty and grooming products.",
   },
@@ -39,6 +45,7 @@ export const productCategories: ProductCategory[] = [
     summary:
       "Housewares, kitchen accessories, home organization, and general household merchandise.",
     image: "/images/category-home.webp",
+    gridImage: "/images/redesign/category-home.jpg",
     imageAlt:
       "Kitchen cookware and utensils on a counter, representing home and kitchen merchandise.",
   },
@@ -48,6 +55,7 @@ export const productCategories: ProductCategory[] = [
     summary:
       "Family-oriented consumer products and everyday household necessities.",
     image: "/images/category-baby.webp",
+    gridImage: "/images/redesign/category-baby.jpg",
     imageAlt:
       "Soft baby toys and family merchandise on a light blanket, representing baby and family products.",
   },
@@ -57,6 +65,7 @@ export const productCategories: ProductCategory[] = [
     summary:
       "Office products, organizational supplies, and school-related merchandise.",
     image: "/images/category-office.webp",
+    gridImage: "/images/redesign/category-office.jpg",
     imageAlt:
       "Notebooks, pens, and desk supplies arranged neatly, representing office and school merchandise.",
   },
@@ -65,6 +74,7 @@ export const productCategories: ProductCategory[] = [
     name: "Pet Supplies",
     summary: "General consumer pet products and accessories.",
     image: "/images/category-pet.webp",
+    gridImage: "/images/redesign/category-pet.jpg",
     imageAlt:
       "A household dog resting indoors, representing general consumer pet products and accessories.",
   },
@@ -73,6 +83,7 @@ export const productCategories: ProductCategory[] = [
     name: "Seasonal Products",
     summary: "Seasonal household and consumer merchandise.",
     image: "/images/category-seasonal.webp",
+    gridImage: "/images/redesign/category-seasonal.jpg",
     imageAlt:
       "Warm string lights suggesting seasonal household merchandise and holiday consumer products.",
   },
@@ -82,6 +93,7 @@ export const productCategories: ProductCategory[] = [
     summary:
       "Additional consumer categories based upon supplier and market opportunities.",
     image: "/images/category-general.webp",
+    gridImage: "/images/redesign/category-general.jpg",
     imageAlt:
       "Retail merchandise displayed on store fixtures, representing general consumer merchandise.",
   },
