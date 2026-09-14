@@ -62,10 +62,12 @@ export const governmentCredentials = {
 export const logo = {
   /**
    * Approved Precision G artwork with its original outlined wordmark.
-   * The dark variant preserves its colors on a white field.
+   * The header uses the mark + wordmark separately so the G stays sharp on mobile.
    */
   useImageAsset: true,
   src: "/logo/greatly-brands.svg",
+  markSrc: "/logo/greatly-brands-mark.svg",
+  wordmarkSrc: "/logo/greatly-brands-wordmark.svg",
   darkSrc: "/logo/greatly-brands-dark.svg",
   width: 1280,
   height: 400,
